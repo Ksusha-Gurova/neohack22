@@ -35,6 +35,13 @@
 
 В качестве облачной инфраструктуры, вам выделен namespace в kubernetes cluster. Для подключения, воспользуйтесь клиентом kubectl и выданными доступами. Доступы даются на команду. Если у вас нет доступов, свяжитесь с организатором.
 
+Конфиг подключения:
+- kubectl config set-cluster k8s --server="$KUBE_URL" --insecure-skip-tls-verify=true
+- kubectl config set-credentials "$K8S_USER" --token="$KUBE_TOKEN"
+- kubectl config set-context default --cluster=k8s --user="$K8S_USER"
+- kubectl config use-context default
+
+* KUBE_TOKEN и K8S_USER выдадут организаторы на команду
 ## Сертификат SSL
 
 Для установки сертификатов SSL на ваше приложение, вы можете воспользоваться предустановленным Issuer, работающим с letsencrypt.
