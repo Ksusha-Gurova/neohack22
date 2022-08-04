@@ -25,9 +25,9 @@
 Ваши приложения должны разворачиваться на домене, типа {MYNAME}.neohack2022.codenrock.com, другие варианты работать не будут.
 
 Доступные переменные:
-KUBE_URL - IP kubernetes cluster
-DOMAIN - общий домен (neohack2022.codenrock.com)
-CI_BUILD_TOKEN и CI_REGISTRY - встроенные переменные Gitlab для доступа к Container Registry
+* KUBE_URL - IP kubernetes cluster
+* DOMAIN - общий домен (neohack2022.codenrock.com)
+* CI_BUILD_TOKEN и CI_REGISTRY - встроенные переменные Gitlab для доступа к Container Registry
 
 Сборка с помощью Gitlab CI/CD происходит по принципу Docker in Docker
 
