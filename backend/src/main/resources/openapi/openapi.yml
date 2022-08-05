@@ -10,7 +10,7 @@ paths:
       tags:
         - users
       summary: вернуть всех пользователей
-      operationId: getAllUsrs
+      operationId: getAllUsers
       responses:
         200:
           description: OK
@@ -38,9 +38,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/UserAllInfoResponseDto"
+                $ref: "#/components/schemas/UserAllInfoResponseDto"
 
   /users/{id}:
     get:
