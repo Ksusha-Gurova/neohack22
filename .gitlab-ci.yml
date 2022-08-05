@@ -1,0 +1,59 @@
+stages:
+  - build
+  - test
+  # - deploy
+
+before_script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  - export DOCKER_BUILDKIT=1
+  - export COMPOSE_DOCKER_CLI_BUILD=1
+
+docker-build:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  script:
+    # nginx-1
+    - docker build -t $CI_REGISTRY_IMAGE:"nginx-1-"$CI_COMMIT_SHORT_SHA ./nginx-test
+    - docker push $CI_REGISTRY_IMAGE:"nginx-1-"$CI_COMMIT_SHORT_SHA
+
+    # nginx-2
+    - docker build -t $CI_REGISTRY_IMAGE:"nginx-2-"$CI_COMMIT_SHORT_SHA ./nginx-test-2
+    - docker push $CI_REGISTRY_IMAGE:"nginx-2-"$CI_COMMIT_SHORT_SHA
+
+    # pg
+    - docker build -t $CI_REGISTRY_IMAGE:"pg-"$CI_COMMIT_SHORT_SHA ./pg
+    - docker push $CI_REGISTRY_IMAGE:"pg-"$CI_COMMIT_SHORT_SHA
+
+    # application
+    - docker build -t $CI_REGISTRY_IMAGE:"application-"$CI_COMMIT_SHORT_SHA ./credit-conveyor/application
+    - docker push $CI_REGISTRY_IMAGE:"application-"$CI_COMMIT_SHORT_SHA
+
+   # conveyor
+    - docker build -t $CI_REGISTRY_IMAGE:"conveyor-"$CI_COMMIT_SHORT_SHA ./credit-conveyor/conveyor
+    - docker push $CI_REGISTRY_IMAGE:"conveyor-"$CI_COMMIT_SHORT_SHA
+
+  # allow_failure: true
+
+docker-test:
+  stage: test
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:nginx-1-$CI_COMMIT_SHORT_SHA
+    - docker pull $CI_REGISTRY_IMAGE:nginx-2-$CI_COMMIT_SHORT_SHA
+    - docker pull $CI_REGISTRY_IMAGE:pg-$CI_COMMIT_SHORT_SHA
+    - docker pull $CI_REGISTRY_IMAGE:application-$CI_COMMIT_SHORT_SHA
+    - docker pull $CI_REGISTRY_IMAGE:conveyor-$CI_COMMIT_SHORT_SHA
+
+
+# deploy-to-kuber:
+#   stage: deploy
+#   image:
+#     name: bitnami/kubectl:latest
+#     entrypoint: [""]
+#   script:
+#   - kubectl config use-context $CONTEXT
+#   - |
+#     eval "cat << EOF       
+#     $(cat manifests/*.yaml)
+#     EOF" | kubectl apply -f -
