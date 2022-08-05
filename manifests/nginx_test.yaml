@@ -11,7 +11,7 @@
 #     - name: regcred
     
 
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sample-app
@@ -35,3 +35,21 @@ spec:
         - containerPort: 8080
       imagePullSecrets:
       - name: regcred
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: neolearn
+  name: sample-app
+spec:
+  selector:
+    app: sample-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+    nodePort: 30080
+  type: NodePort
+
