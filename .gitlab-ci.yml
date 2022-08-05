@@ -57,11 +57,11 @@ deploy-to-kuber:
   # - kubectl config set-credentials "team-11" --token="eyJhbGciOiJSUzI1NiIsImtpZCI6IndSNEMxU3JTb0JVVHF5allFZzY2TjdNOXVteUMyQXQ4YmVXb21xLXZXTmMifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InRlYW0tMTEtdG9rZW4tbGprcWIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoidGVhbS0xMSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjZhOTZlNjUwLTAzYmItNDM1MC05OGE2LTc1NTJkMzMwZDViNSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OnRlYW0tMTEifQ.T29dl-bYrBJs6s4oYCXECSCGA8NIuC0FYlhNgAWVxpkwUU5eei0DGLXEaZt0Fs9F4zKPfcuLiGJu1JgTwqregq4U-DAUjQEPoyTeno8QMxFeZKWrqvJluooYSXvPbv78Xyu7IwiM6aSR34gD_WXrwfTSujR5FOsoqPaQ0v7M1mwvbO8VmiDFsVHduQaQEgF7CEhYGyqCCdJMpI_3dYKuuk3EefacAeEgWHCS3n45aOx1bYnLBSdwDhelaNT-9D70JLc-OlMbgwW0WT-jATrboTgZot8RwlyKOVTudtroHyX5ldMrYtyyXIENmRTTEzlyAewmkA20xLV4M_HO_89I-A"
   # - kubectl config set-context default --cluster=k8s --user="team-11"
   # - kubectl config use-context default
-  - kubectl config set-cluster k8s --server=$KUBER_URL --insecure-skip-tls-verify=true
-  - kubectl config set-credentials $KUBER_USER --token=$KUBER_TOKEN
-  - kubectl config set-context default --cluster=k8s --user=$KUBER_USER
-  - kubectl config use-context default
-  - |
-    eval "cat << EOF       
-    $(cat manifests/*.yaml)
-    EOF" | kubectl apply -f -
+    - kubectl config set-cluster k8s --server=$KUBER_URL --insecure-skip-tls-verify=true
+    - kubectl config set-credentials $KUBER_USER --token=$KUBER_TOKEN
+    - kubectl config set-context default --cluster=k8s --user=$KUBER_USER
+    - kubectl config use-context default
+    - |
+      eval "cat << EOF       
+      $(cat manifests/*.yaml)
+      EOF" | kubectl apply -f -
