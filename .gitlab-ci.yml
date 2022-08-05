@@ -28,8 +28,8 @@ docker-build:
 docker-test:
   stage: test
   variables:
-    IMAGE-NGINX-1: $CI_REGISTRY_IMAGE:"nginx-1-"$CI_COMMIT_SHORT_SHA
-    IMAGE-NGINX-1: $CI_REGISTRY_IMAGE:"nginx-2-"$CI_COMMIT_SHORT_SHA
+    IMAGE-NGINX-1: $CI_REGISTRY_IMAGE:nginx-1-$CI_COMMIT_SHORT_SHA
+    IMAGE-NGINX-1: $CI_REGISTRY_IMAGE:nginx-2-$CI_COMMIT_SHORT_SHA
   script:
     - docker pull $IMAGE-NGINX-1
     - docker pull $IMAGE-NGINX-2
