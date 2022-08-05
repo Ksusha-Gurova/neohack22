@@ -1,0 +1,8 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  datasource:
+    url: ${POSTGRES_URL:jdbc:postgresql://rc1b-u7zlzo5gs9o7vzi4.mdb.yandexcloud.net:6432/team-11}
+    username: ${POSTGRES_USER:team-11}
+    password: ${POSTGRES_PASSWORD:ootaishu3hie0EiTo2Teicai3aeK8guk}
