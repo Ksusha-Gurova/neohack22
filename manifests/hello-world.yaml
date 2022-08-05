@@ -17,25 +17,25 @@ spec:
     spec:
       containers:
       - name: sample-app
-        image: "registry.git.codenrock.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA"
+        image: "$CI_REGISTRY_IMAGE:nginx-1-$CI_COMMIT_SHORT_SHA"
         ports:
         - containerPort: 8080
       imagePullSecrets:
       - name: regcred
 
-apiVersion: v1 
-kind: Service
-metadata:
-  namespace: team-11
-  name: sample-app
-spec:
-  selector:
-    app: sample-app
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
-    nodePort: 30080
-  type: NodePort
+# apiVersion: v1 
+# kind: Service
+# metadata:
+#   namespace: team-11
+#   name: sample-app
+# spec:
+#   selector:
+#     app: sample-app
+#   ports:
+#   - protocol: TCP
+#     port: 80
+#     targetPort: 8080
+#     nodePort: 30080
+#   type: NodePort
 
 
