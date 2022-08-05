@@ -9,6 +9,7 @@ docker-build:
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD git.codenrock.com
   script:
-    - docker build -t "git.codenrock.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA" .
-    - docker push "git.codenrock.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA"
-    
+#    - docker build -t "git.codenrock.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA" .
+#    - docker push "git.codenrock.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA"
+    - docker build -t "git.codenrock.com/neohack2022/withdevops/cnrprod-team-22113/neohack22:$CI_COMMIT_SHORT_SHA" .
+    - docker push "git.codenrock.com/neohack2022/withdevops/cnrprod-team-22113/neohack22:$CI_COMMIT_SHORT_SHA"
