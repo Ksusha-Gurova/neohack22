@@ -65,6 +65,7 @@ deploy-to-kuber:
     - kubectl config set-credentials $KUBER_USER --token=$KUBER_TOKEN
     - kubectl config set-context default --cluster=k8s --user=$KUBER_USER
     - kubectl config use-context default
+    - kubectl create secret docker-registry regcred --docker-server=$CI_REGISTRY --docker-username=$CI_REGISTRY_USER --docker-password=$CI_REGISTRY_PASSWORD --docker-email="test@test.test"  -n team-11
     - |
       eval "cat << EOF       
       $(cat manifests/*.yaml)
