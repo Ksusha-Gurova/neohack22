@@ -35,7 +35,11 @@ deploy-to-kuber:
     - kubectl config set-credentials $KUBER_USER --token=$KUBER_TOKEN
     - kubectl config set-context default --cluster=k8s --user=$KUBER_USER
     - kubectl config use-context default
+    
+    # delete 
     - kubectl delete secret regcred -n $KUBER_NAMESPACE
+
+    # create
     - kubectl create secret docker-registry regcred --docker-server=$CI_REGISTRY --docker-username=$CI_REGISTRY_USER --docker-password=$CI_REGISTRY_PASSWORD --docker-email="test@test.test"  -n $KUBER_NAMESPACE
     - |
       eval "cat << EOF       
