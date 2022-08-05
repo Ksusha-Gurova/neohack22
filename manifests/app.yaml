@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: v1
 kind: Ingress
 metadata:
   name: minimal-ingress
@@ -36,7 +36,7 @@ spec:
       port: 80
       targetPort: 80
 ---
-apiVersion: apps/v1
+apiVersion: v1
 kind: Deployment
 metadata:
   name: app-deployment
@@ -58,4 +58,3 @@ spec:
         image: nginx:latest
         ports:
         - containerPort: 80
-        
