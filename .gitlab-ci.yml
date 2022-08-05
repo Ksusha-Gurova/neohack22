@@ -1,6 +1,6 @@
 stages:
   - build
-  - deploy
+  # - deploy
 
 docker-build:
   image: docker:latest
@@ -8,40 +8,40 @@ docker-build:
   services:
     - docker:dind
   before_script:
-    - echo $CI_REGISTRY_USER
-    - echo $CI_REGISTRY_PASSWORD
-    - echo $CI_PROJECT_NAMESPACE
-    - echo $CI_PROJECT_NAME
-    - echo $CI_COMMIT_SHORT_SHA
-    - echo $CI_DEPLOY_USER
-    - echo $CI_DEPLOY_PASSWORD
-    - echo $CI_REGISTRY_IMAGE
-#    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD git.codenrock.com
-#    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
+#     - echo $CI_REGISTRY_USER
+#     - echo $CI_REGISTRY_PASSWORD
+#     - echo $CI_PROJECT_NAMESPACE
+#     - echo $CI_PROJECT_NAME
+#     - echo $CI_COMMIT_SHORT_SHA
+#     - echo $CI_DEPLOY_USER
+#     - echo $CI_DEPLOY_PASSWORD
+#     - echo $CI_REGISTRY_IMAGE
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD git.codenrock.com
+#     - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
   script:
     # - docker build -t "git.codenrock.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA" ./nginx-test
     # - docker push "git.codenrock.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA"
     
-    # - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA ./nginx-test
-    # - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    - docker build -t $CI_REGISTRY_IMAGE-nginx:$CI_COMMIT_SHORT_SHA ./nginx-test
+    - docker push $CI_REGISTRY_IMAGE-nginx:$CI_COMMIT_SHORT_SHA
 
-    - docker build -t $CI_REGISTRY_IMAGE ./nginx-test
-    - docker push $CI_REGISTRY_IMAGE
+    # - docker build -t $CI_REGISTRY_IMAGE ./nginx-test
+    # - docker push $CI_REGISTRY_IMAGE
   allow_failure: true
 
 
 
 
-deploy-to-kuber:
-  stage: deploy
-  image:
-    name: bitnami/kubectl:latest
-    entrypoint: [""]
-  script:
-  - kubectl config use-context $CONTEXT
-  - |
-    eval "cat << EOF       
-    $(cat manifests/*.yaml)
-    EOF" | kubectl apply -f -
+# deploy-to-kuber:
+#   stage: deploy
+#   image:
+#     name: bitnami/kubectl:latest
+#     entrypoint: [""]
+#   script:
+#   - kubectl config use-context $CONTEXT
+#   - |
+#     eval "cat << EOF       
+#     $(cat manifests/*.yaml)
+#     EOF" | kubectl apply -f -
