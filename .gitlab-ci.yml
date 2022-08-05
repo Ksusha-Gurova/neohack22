@@ -12,27 +12,26 @@ docker-build:
   services:
     - docker:dind
   script:
-    # - docker build -t "git.codenrock.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA" ./nginx-test
-    # - docker push "git.codenrock.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA"
-    
+    # nginx-1
     - docker build -t $CI_REGISTRY_IMAGE:"nginx-1-"$CI_COMMIT_SHORT_SHA ./nginx-test
     - docker push $CI_REGISTRY_IMAGE:"nginx-1-"$CI_COMMIT_SHORT_SHA
 
+    # nginx-2
     - docker build -t $CI_REGISTRY_IMAGE:"nginx-2-"$CI_COMMIT_SHORT_SHA ./nginx-test-2
     - docker push $CI_REGISTRY_IMAGE:"nginx-2-"$CI_COMMIT_SHORT_SHA
 
-    # - docker build -t $CI_REGISTRY_IMAGE ./nginx-test
-    # - docker push $CI_REGISTRY_IMAGE
+    # pg
+    - docker build -t $CI_REGISTRY_IMAGE:"pg-"$CI_COMMIT_SHORT_SHA ./pg
+    - docker push $CI_REGISTRY_IMAGE:"pg-"$CI_COMMIT_SHORT_SHA
+
   # allow_failure: true
 
 docker-test:
   stage: test
-  # variables:
-  #   IMAGE-NGINX-1: $CI_REGISTRY_IMAGE:nginx-1-$CI_COMMIT_SHORT_SHA
-  #   IMAGE-NGINX-1: $CI_REGISTRY_IMAGE:nginx-2-$CI_COMMIT_SHORT_SHA
   script:
     - docker pull $CI_REGISTRY_IMAGE:nginx-1-$CI_COMMIT_SHORT_SHA
     - docker pull $CI_REGISTRY_IMAGE:nginx-2-$CI_COMMIT_SHORT_SHA
+    - docker pull $CI_REGISTRY_IMAGE:pg-$CI_COMMIT_SHORT_SHA
 
 
 # deploy-to-kuber:
