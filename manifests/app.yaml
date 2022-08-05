@@ -12,7 +12,7 @@ spec:
       - "prj-578.neohack2022.codenrock.com"
       secretName: letsencrypt
   rules:
-    - host: prj-578.neohack2022.codenrock.com
+    - host: "prj-578.neohack2022.codenrock.com"
       http:
         paths:
         - path: /
