@@ -12,7 +12,7 @@ docker-build:
     - echo $CI_REGISTRY_PASSWORD
     - echo $CI_PROJECT_NAMESPACE
     - echo $CI_PROJECT_NAME
-    - $CI_COMMIT_SHORT_SHA
+    - echo $CI_COMMIT_SHORT_SHA
   script:
     - docker build -t "git.codenrock.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA" .
     - docker push "git.codenrock.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA"
