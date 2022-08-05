@@ -1,9 +1,0 @@
-# gitops:
-#   manifest_projects:
-#   - id: "iurii-stepanov/sample-app"
-#     paths:
-#       - glob: '/manifests/*.{yaml,yml,json}'
-
-ci_access:
-  projects:
-  - id: "neohack2022/withdevops/cnrprod-team-22113/neohack22"
