@@ -24,6 +24,14 @@ docker-build:
     - docker build -t $CI_REGISTRY_IMAGE:"pg-"$CI_COMMIT_SHORT_SHA ./pg
     - docker push $CI_REGISTRY_IMAGE:"pg-"$CI_COMMIT_SHORT_SHA
 
+    # application
+    - docker build -t $CI_REGISTRY_IMAGE:"application-"$CI_COMMIT_SHORT_SHA ./credit-conveyor/application
+    - docker push $CI_REGISTRY_IMAGE:"application-"$CI_COMMIT_SHORT_SHA
+
+   # conveyor
+    - docker build -t $CI_REGISTRY_IMAGE:"conveyor-"$CI_COMMIT_SHORT_SHA ./credit-conveyor/conveyor
+    - docker push $CI_REGISTRY_IMAGE:"conveyor-"$CI_COMMIT_SHORT_SHA
+
   # allow_failure: true
 
 docker-test:
@@ -32,6 +40,8 @@ docker-test:
     - docker pull $CI_REGISTRY_IMAGE:nginx-1-$CI_COMMIT_SHORT_SHA
     - docker pull $CI_REGISTRY_IMAGE:nginx-2-$CI_COMMIT_SHORT_SHA
     - docker pull $CI_REGISTRY_IMAGE:pg-$CI_COMMIT_SHORT_SHA
+    - docker pull $CI_REGISTRY_IMAGE:application-$CI_COMMIT_SHORT_SHA
+    - docker pull $CI_REGISTRY_IMAGE:conveyor-$CI_COMMIT_SHORT_SHA
 
 
 # deploy-to-kuber:
