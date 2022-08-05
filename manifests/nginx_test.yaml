@@ -41,7 +41,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: neolearn
+  namespace: $KUBER_NAMESPACE
   name: sample-app
 spec:
   selector:
