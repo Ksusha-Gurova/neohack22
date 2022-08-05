@@ -17,8 +17,8 @@ docker-build:
     - echo $CI_DEPLOY_PASSWORD
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD git.codenrock.com
 #    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
-#    - docker login -u cnrprod-team-22113 -p 5E8taDAvpH1z2qq5uCqZ git.codenrock.com
 
   script:
-    - docker build -t "git.codenrock.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME-nginx:$CI_COMMIT_SHORT_SHA" .
-    - docker push "git.codenrock.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME-nginx:$CI_COMMIT_SHORT_SHA"
+    - docker build -t "git.codenrock.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA" ./nginx-test
+    - docker push "git.codenrock.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA"
+    
