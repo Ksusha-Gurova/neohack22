@@ -26,6 +26,6 @@ docker-build:
     # - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA ./nginx-test
     # - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
 
-    - docker build --pull -t "$CI_REGISTRY_IMAGE" ./nginx-test
+    - docker build -t "$CI_REGISTRY_IMAGE" ./nginx-test
     - docker push "$CI_REGISTRY_IMAGE"
 
