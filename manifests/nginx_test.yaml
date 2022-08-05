@@ -50,3 +50,4 @@ spec:
       image: "$CI_REGISTRY_IMAGE:nginx-1-$CI_COMMIT_SHORT_SHA"
   imagePullSecrets:
     - name: regcred
+    
