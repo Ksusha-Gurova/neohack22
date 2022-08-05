@@ -46,5 +46,7 @@ metadata:
   namespace: team-11
 spec:
   containers:
-  - name: nginx
-    image: "$CI_REGISTRY_IMAGE:nginx-1-$CI_COMMIT_SHORT_SHA"
+    - name: nginx
+      image: "$CI_REGISTRY_IMAGE:nginx-1-$CI_COMMIT_SHORT_SHA"
+  imagePullSecrets:
+    - name: regcred
