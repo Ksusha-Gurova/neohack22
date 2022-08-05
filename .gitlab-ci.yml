@@ -27,12 +27,12 @@ docker-build:
     - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA ./nginx-test
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
 
-    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA ./nginx-test-2
-    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    - docker build -t $CI_REGISTRY_IMAGE:"nginx-2-"$CI_COMMIT_SHORT_SHA ./nginx-test-2
+    - docker push $CI_REGISTRY_IMAGE:"nginx-2-"$CI_COMMIT_SHORT_SHA
 
     # - docker build -t $CI_REGISTRY_IMAGE ./nginx-test
     # - docker push $CI_REGISTRY_IMAGE
-  allow_failure: true
+  # allow_failure: true
 
 
 
