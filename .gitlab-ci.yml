@@ -61,10 +61,10 @@ deploy-to-kuber:
     - kubectl config use-context default
     
     # delete docker-registry secret
-    # - kubectl delete secret regcred -n $KUBER_NAMESPACE
+    - kubectl delete secret regcred -n $KUBER_NAMESPACE
 
     # create docker-registry secret
-    # - kubectl create secret docker-registry regcred --docker-server=$CI_REGISTRY --docker-username=$CI_REGISTRY_USER --docker-password=$CI_REGISTRY_PASSWORD --docker-email="test@test.test"  -n $KUBER_NAMESPACE
+    - kubectl create secret docker-registry regcred --docker-server=$CI_REGISTRY --docker-username=$CI_REGISTRY_USER --docker-password=$CI_REGISTRY_PASSWORD --docker-email="test@test.test"  -n $KUBER_NAMESPACE
     - |
       eval "cat << EOF       
       $(cat manifests/*.yaml)
