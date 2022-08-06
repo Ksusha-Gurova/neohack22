@@ -4,10 +4,11 @@ stages:
   - deploy
 
 
-
 docker-build:
   image: docker:latest
   stage: build
+  only:
+    - main
   ######################
    # rules:
    #  - when: never
@@ -34,9 +35,10 @@ docker-build:
   # allow_failure: true
 
 
-
 docker-test:
   stage: test
+  only:
+    - main
   ######################
   # rules:
   #  - when: never
@@ -53,8 +55,11 @@ docker-test:
     # test pull frontend
     - docker pull $CI_REGISTRY_IMAGE:frontend-$CI_COMMIT_SHORT_SHA
 
+
 deploy-to-kuber:
   stage: deploy
+  only:
+    - main
   ######################
   # rules:
   #   - when: never
