@@ -157,7 +157,7 @@ export default function PrimarySearchAppBar() {
 
     return (
         <Box sx={ { flexGrow: 1 } }>
-            <AppBar sx={ { pb: 2, background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(74,9,121,1) 26%, rgba(0,212,255,1) 100%)' } } position="static">
+            <AppBar sx={ { pb: 2, background: '#9d88fc' } } position="static">
                 <Toolbar>
                     <IconButton
                         size="large"
