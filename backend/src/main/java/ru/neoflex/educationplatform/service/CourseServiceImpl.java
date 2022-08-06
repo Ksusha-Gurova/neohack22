@@ -3,8 +3,10 @@ package ru.neoflex.educationplatform.service;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.CourseAllInfoResponseDto;
 import org.openapitools.model.CourseRequestDto;
+import org.openapitools.model.LessonAllInfo;
 import org.springframework.stereotype.Service;
 import ru.neoflex.educationplatform.mapper.CourseMapper;
+import ru.neoflex.educationplatform.mapper.LessonMapper;
 import ru.neoflex.educationplatform.model.Course;
 import ru.neoflex.educationplatform.model.InterestTag;
 import ru.neoflex.educationplatform.model.User;
@@ -24,6 +26,7 @@ public class CourseServiceImpl implements CourseService{
     private final CourseMapper courseMapper;
     private final InterestTagRepository tagRepository;
     private final UserRepository userRepository;
+    private final LessonMapper lessonMapper;
 
     @Override
     public void deleteCourse(Long id) {
@@ -59,6 +62,11 @@ public class CourseServiceImpl implements CourseService{
             return courseMapper.mapEntityToCourseAllInfoResponseDto(save);
         }
 
+    }
 
+    @Override
+    public List<LessonAllInfo> getLessonsByCourseId(Long id) {
+        Course course = coursRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("В базе нет курса с id " + id));
+        return course.getLessons().stream().map(lessonMapper::mapEntityToLessonAllInfo).collect(Collectors.toList());
     }
 }
