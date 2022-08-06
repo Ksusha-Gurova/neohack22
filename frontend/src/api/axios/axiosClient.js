@@ -36,10 +36,7 @@ export const axiosRegisterUser = (user) => {
         email: user.email,
         birthdate: user.birthdate,
         city: user.city,
-        phone: "9997776655",
         password: user.password,
-        registrationDate: "2022-08-06",
-        active: true,
         role: user.role
     })
 }

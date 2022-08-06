@@ -23,12 +23,13 @@ import { Auth } from '../components/auth';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { AuthHeader } from '../components/authHeader';
+import {isTokenValid} from "../api/axios/jwt/jwtLocalStorage";
 
 export const AppRouter = () => {
     const dispatch = useDispatch();
     const [isAuth, setAuth] = useState(
-        // isTokenValid
-        false
+        isTokenValid
+        // false
     )
 
     useEffect(() => {

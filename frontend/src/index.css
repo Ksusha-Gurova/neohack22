@@ -146,3 +146,44 @@ a {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
 }
+
+.input-auth {
+    display: block;
+    min-width: 395px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #7a7b7c;
+}
+
+.label-auth{
+    font-size: 18px;
+    color: #18095d;
+    margin-top: 15px;
+}
+
+.radio-auth {
+    margin-left: 15px;
+}
+
+.container-radio-auth {
+    margin-bottom: 15px;
+}
+
+.btn-submit {
+    min-width: 395px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #7a7b7c;
+    margin-bottom: 15px;
+    color: white;
+    background: #9d88fc;
+    font-size: 18px;
+}
+
+.btn-submit:hover {
+    background: #7e62fa;
+}
+
+.btn-submit:active {
+    background: #5e3afd;
+}
