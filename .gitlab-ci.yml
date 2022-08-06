@@ -10,7 +10,7 @@ docker-build:
   only:
     - main
   ######################
-   rules:
+  rules:
     - when: never
    #####################
   services:
