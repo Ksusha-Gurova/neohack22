@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { EMAIL_REGEXP } from "../utils/consts";
+import axios from "axios";
+import {SERVER_PATH} from "../api/axios/axiosClient";
 
 export const RegistrationForm = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -8,7 +10,20 @@ export const RegistrationForm = () => {
     const password = useRef({});
     password.current = watch("password", "");
 
-    const onSubmit = data => console.log(data);
+    const onSubmit = (data) => {
+        console.log(data);
+        axios.post(`${SERVER_PATH}/users/registration`, {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            birthdate: data.birthdate,
+            city: data.city,
+            password: data.password,
+            registrationDate: "2022-08-06",
+            active: true,
+            role: data.role
+        }).then(r => console.log(r))
+     }
 
     return (
         <form className='container-form-auth' onSubmit={ handleSubmit(onSubmit) }>

@@ -8,7 +8,7 @@ export const LoginForm = () => {
     const onSubmit = data => console.log(data);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className='container-form-auth' onSubmit={handleSubmit(onSubmit)}>
             <br/>
             <label>Email</label>
             <input {...register("email", {

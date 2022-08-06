@@ -16,6 +16,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import brain from '../../image/265-2656199_brain-icon-hd-png-download-PhotoRoom.png'
+import { useHistory } from 'react-router-dom';
+import { PROFILE_ROUTE } from '../../utils/consts';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -60,6 +62,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function PrimarySearchAppBar() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const history = useHistory()
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -76,6 +79,10 @@ export default function PrimarySearchAppBar() {
         setAnchorEl(null);
         handleMobileMenuClose();
     };
+
+    const handleRedirectProfile = () => {
+        history.push(PROFILE_ROUTE)
+    }
 
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
@@ -98,8 +105,11 @@ export default function PrimarySearchAppBar() {
             open={ isMenuOpen }
             onClose={ handleMenuClose }
         >
-            <MenuItem onClick={ handleMenuClose }>Profile</MenuItem>
-            <MenuItem onClick={ handleMenuClose }>My account</MenuItem>
+            <MenuItem onClick={(e) => {
+                handleRedirectProfile(e)
+                handleMenuClose(e)
+            } }>Profile</MenuItem>
+            <MenuItem onClick={ handleMenuClose }>Logout</MenuItem>
         </Menu>
     );
 
@@ -171,6 +181,7 @@ export default function PrimarySearchAppBar() {
                         />
                     </Search>
                     <a href='/theme'>Курсы</a>
+                    <a href='/theme'>Форум</a>
                     <Box sx={ { flexGrow: 1 } }/>
                     <Box sx={ { display: { xs: 'none', md: 'flex' } } }>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">

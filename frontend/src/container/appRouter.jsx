@@ -28,7 +28,7 @@ export const AppRouter = () => {
     const dispatch = useDispatch();
     const [isAuth, setAuth] = useState(
         // isTokenValid
-        true
+        false
     )
 
     useEffect(() => {
