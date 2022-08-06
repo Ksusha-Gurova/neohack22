@@ -427,20 +427,9 @@ components:
           type: string
         password:
           type: string
-        registrationDate:
-          type: string
-          format: date
-        active:
-          type: boolean
 
     UserAllInfoResponseDto:
       type: object
-      required:
-        - firstName
-        - lastName
-        - email
-        - birthdate
-        - city
       properties:
         id:
           type: integer
@@ -579,7 +568,7 @@ components:
         answers:
           type: array
           items:
-            $ref: "#/components/schemas/SimpleResponseDto"
+            $ref: "#/components/schemas/AnswerAllInfo"
 
     AnswerAllInfo:
       type: object
@@ -587,7 +576,7 @@ components:
         id:
           type: integer
           format: int64
-        task_id:
+        taskId:
           type: integer
           format: int64
         answerText:
@@ -634,11 +623,13 @@ components:
           format: int64
         name:
           type: string
+        lesson:
+          type: integer
+          format: int64
         answers:
           type: array
           items:
-            type: integer
-            format: int64
+            $ref: "#/components/schemas/AnswerRequestDto"
 
     SimpleResponseDto:
       type: object
@@ -677,6 +668,8 @@ components:
         - email
         - birthdate
         - city
+        - role
+        - password
       properties:
         firstName:
           type: string
@@ -692,11 +685,6 @@ components:
           type: string
         password:
           type: string
-        registrationDate:
-          type: string
-          format: date
-        active:
-          type: boolean
         role:
          type: string
          enum:
@@ -709,6 +697,14 @@ components:
       properties:
         message:
           type: string
+
+    AnswerRequestDto:
+      type: object
+      properties:
+        answerText:
+          type: string
+        correct:
+          type: boolean
 
 
 

@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Entity
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "answers", schema = "education_platform")

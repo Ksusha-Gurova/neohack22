@@ -23,6 +23,7 @@ import ru.neoflex.educationplatform.repository.UserRepository;
 import ru.neoflex.educationplatform.security.JwtTokenProvider;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -82,7 +83,10 @@ public class UserServiceImpl implements UserService {
             throw new CustomException("Пользователь с таким email уже существует", HttpStatus.BAD_REQUEST);
         } else {
             Role role = roleRepository.findByName(userRegistrationDto.getRole().getValue().toUpperCase(Locale.ROOT));
-            userRepository.save(userMapper.mapUserRegistrationDtoToEntity(userRegistrationDto, role, passwordEncoder.encode(userRegistrationDto.getPassword())));
+            User user = userMapper.mapUserRegistrationDtoToEntity(userRegistrationDto, role, passwordEncoder.encode(userRegistrationDto.getPassword()));
+            user.setRegistrationDate(LocalDate.now());
+            user.setActive(true);
+            userRepository.save(user);
         }
     }
 }
