@@ -14,10 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.LinkedHashSet;
-import java.util.Set;
+
 
 @Getter
 @Setter
@@ -42,8 +40,6 @@ public class Answer {
     @Column(name = "correct", nullable = false)
     private Boolean correct = false;
 
-    @OneToMany(mappedBy = "answer")
-    private Set<UserQuestionAnswerLink> userQuestionAnswerLinks = new LinkedHashSet<>();
 
 
 }

@@ -6,7 +6,11 @@ import org.openapitools.model.CourseRequestDto;
 import org.springframework.stereotype.Service;
 import ru.neoflex.educationplatform.mapper.CourseMapper;
 import ru.neoflex.educationplatform.model.Course;
+import ru.neoflex.educationplatform.model.InterestTag;
+import ru.neoflex.educationplatform.model.User;
 import ru.neoflex.educationplatform.repository.CoursRepository;
+import ru.neoflex.educationplatform.repository.InterestTagRepository;
+import ru.neoflex.educationplatform.repository.UserRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -18,6 +22,8 @@ public class CourseServiceImpl implements CourseService{
 
     private final CoursRepository coursRepository;
     private final CourseMapper courseMapper;
+    private final InterestTagRepository tagRepository;
+    private final UserRepository userRepository;
 
     @Override
     public void deleteCourse(Long id) {
@@ -26,7 +32,7 @@ public class CourseServiceImpl implements CourseService{
 
     @Override
     public List<CourseAllInfoResponseDto> getAllPublicCourses() {
-        return coursRepository.findAllByIsPrivateAndStatus(false, "available")
+        return coursRepository.findAllByIsPrivateAndStatus(false, "AVAILABLE")
                 .stream().map(courseMapper::mapEntityToCourseAllInfoResponseDto).collect(Collectors.toList());
     }
 
@@ -38,13 +44,18 @@ public class CourseServiceImpl implements CourseService{
 
     @Override
     public CourseAllInfoResponseDto updateCourse(CourseRequestDto courseRequestDto) {
-        if(courseRequestDto.getId() != null) {
+        List<InterestTag> allTagsById = tagRepository.findAllByIdIn(courseRequestDto.getInterestTags());
+        User author = userRepository.findById(courseRequestDto.getAuthor())
+                .orElseThrow(() -> new EntityNotFoundException("В базе нет пользователя с id " + courseRequestDto.getAuthor()));
+
+        if (courseRequestDto.getId() != null) {
             Course course = coursRepository.findById(courseRequestDto.getId())
+                    .map(c -> courseMapper.updateEntityFromCourseRequestDto(c, courseRequestDto, allTagsById, author))
                     .orElseThrow(() -> new EntityNotFoundException("В базе нет курса с id " + courseRequestDto.getId()));
-            course = coursRepository.save(courseMapper.updateEntityFromCourseRequestDto(course, courseRequestDto));
+            course = coursRepository.save(course);
             return courseMapper.mapEntityToCourseAllInfoResponseDto(course);
         } else {
-            Course save = coursRepository.save(courseMapper.mapCourseRequestDtoToEntity(courseRequestDto));
+            Course save = coursRepository.save(courseMapper.mapCourseRequestDtoToEntity(courseRequestDto, allTagsById, author));
             return courseMapper.mapEntityToCourseAllInfoResponseDto(save);
         }
 
