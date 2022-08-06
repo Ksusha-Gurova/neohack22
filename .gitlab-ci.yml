@@ -10,8 +10,8 @@ docker-build:
   only:
     - main
   ######################
-  # rules:
-  #   - when: never
+  rules:
+    - when: never
    #####################
   services:
     - docker:dind
@@ -40,8 +40,8 @@ docker-test:
   only:
     - main
   ######################
-  # rules:
-  #   - when: never
+  rules:
+    - when: never
   #####################
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
