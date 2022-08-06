@@ -10,9 +10,9 @@ docker-build:
   only:
     - main
   ######################
-   # rules:
-   #  - when: never
-   #####################
+  # rules:
+  #   - when: never
+  #####################
   services:
     - docker:dind
   before_script:
@@ -20,10 +20,6 @@ docker-build:
     - export DOCKER_BUILDKIT=1
     - export COMPOSE_DOCKER_CLI_BUILD=1
   script:
-    # test build nginx-1
-    # - docker build -t $CI_REGISTRY_IMAGE:"nginx-1-"$CI_COMMIT_SHORT_SHA ./nginx-test
-    # - docker push $CI_REGISTRY_IMAGE:"nginx-1-"$CI_COMMIT_SHORT_SHA
-
     # build backend
     - docker build -t $CI_REGISTRY_IMAGE:"backend-"$CI_COMMIT_SHORT_SHA ./backend
     - docker push $CI_REGISTRY_IMAGE:"backend-"$CI_COMMIT_SHORT_SHA
@@ -41,14 +37,11 @@ docker-test:
     - main
   ######################
   # rules:
-  #  - when: never
+  #   - when: never
   #####################
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
-    # test pull nginx-1
-    # - docker pull $CI_REGISTRY_IMAGE:nginx-1-$CI_COMMIT_SHORT_SHA
-
     # test pull backend
     - docker pull $CI_REGISTRY_IMAGE:backend-$CI_COMMIT_SHORT_SHA
 
@@ -82,4 +75,6 @@ deploy-to-kuber:
       eval "cat << EOF       
       $(cat manifests/*.yaml)
       EOF" | kubectl apply -f -
+    # - kubectl apply -f ./manifests/backend.yaml
+    # - kubectl apply -f ./manifests/frontend.yaml
     
