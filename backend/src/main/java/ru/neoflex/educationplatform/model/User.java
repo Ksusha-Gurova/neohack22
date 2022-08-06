@@ -50,9 +50,6 @@ public class User {
     @Column(name = "city", nullable = false)
     private String city;
 
-    @Column(name = "phone", nullable = false)
-    private String phone;
-
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -76,12 +73,14 @@ public class User {
 
     @ManyToMany
     @JoinTable(name = "users_interest_tag_link",
+            schema = "education_platform",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "interest_tag_id"))
     private Set<InterestTag> interestTags = new LinkedHashSet<>();
 
     @ManyToMany
     @JoinTable(name = "user_course_link",
+            schema = "education_platform",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
     private Set<Course> coursesAsStudent = new LinkedHashSet<>();

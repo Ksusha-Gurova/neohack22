@@ -37,7 +37,7 @@ public class Task {
     @JoinColumn(name = "lesson_id", nullable = false)
     private Lesson lesson;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "question", nullable = false)
     private String name;
 
     @Column(name = "deadline", nullable = false)

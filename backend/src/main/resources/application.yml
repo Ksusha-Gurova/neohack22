@@ -12,5 +12,5 @@ application:
     secret: ${TOKEN_SECRET_KEY:mkASfjdioeijhfouebfka`bsdkhvbsd;vbk'asejfiwehfawfawefweag}
     header-name: ${TOKEN_HEADER_NAME:Authorization}
     prefix: ${TOKEN_PREFIX:Bearer }
-    expiration: ${TOKEN_EXPIRATION_TIME:3600000} #3600000 = one hour
+    expiration: ${TOKEN_EXPIRATION_TIME:3600000000} #3600000 = one hour
 

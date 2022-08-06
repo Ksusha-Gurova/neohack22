@@ -61,7 +61,7 @@ paths:
     post:
       tags:
         - users
-      summary: создать/обновить юзера
+      summary: обновить юзера
       operationId: updateUser
       requestBody:
         required: true
@@ -412,7 +412,6 @@ components:
         - lastName
         - email
         - birthdate
-        - phone
         - city
       properties:
         id:
@@ -429,8 +428,6 @@ components:
           type: string
           format: date
         city:
-          type: string
-        phone:
           type: string
         password:
           type: string
@@ -447,7 +444,6 @@ components:
         - lastName
         - email
         - birthdate
-        - phone
         - city
       properties:
         id:
@@ -465,9 +461,6 @@ components:
           format: date
         city:
           type: string
-        phone:
-          type: string
-          pattern: /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/
         registrationDate:
           type: string
           format: date
@@ -731,7 +724,6 @@ components:
         - lastName
         - email
         - birthdate
-        - phone
         - city
       properties:
         firstName:
@@ -745,8 +737,6 @@ components:
           type: string
           format: date
         city:
-          type: string
-        phone:
           type: string
         password:
           type: string

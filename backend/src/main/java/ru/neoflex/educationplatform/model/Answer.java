@@ -34,7 +34,7 @@ public class Answer {
     private String answerText;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "question_id", nullable = false)
+    @JoinColumn(name = "task_id", nullable = false)
     private Question question;
 
     @Column(name = "correct", nullable = false)

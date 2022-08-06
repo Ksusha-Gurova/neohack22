@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user_question_answer_link", schema = "education_platform")
+@Table(name = "user_task_answer_link", schema = "education_platform")
 public class UserQuestionAnswerLink {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,7 @@ public class UserQuestionAnswerLink {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "question_id", nullable = false)
+    @JoinColumn(name = "task_id", nullable = false)
     private Question question;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
