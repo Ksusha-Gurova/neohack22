@@ -5,6 +5,43 @@ info:
 servers:
   - url: localhost:8080
 paths:
+  /users/login:
+    post:
+      tags:
+        - users
+      summary: логин
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserLoginDto"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenDto"
+
+
+  /users/registration:
+    post:
+      tags:
+        - users
+      summary: регистрация
+      operationId: registration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRegistrationDto"
+      responses:
+        200:
+          description: OK
+
   /users:
     get:
       tags:
@@ -667,6 +704,69 @@ components:
         name:
           type: string
 
+    UserLoginDto:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          pattern: ^[\w\.]{2,50}@[\w\.]{2,20}
+        password:
+          type: string
+
+    TokenDto:
+      type: object
+      required:
+        - token
+      properties:
+        token:
+          type: string
+
+    UserRegistrationDto:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - email
+        - birthdate
+        - phone
+        - city
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          pattern: ^[\w\.]{2,50}@[\w\.]{2,20}
+        birthdate:
+          type: string
+          format: date
+        city:
+          type: string
+        phone:
+          type: string
+        password:
+          type: string
+        registrationDate:
+          type: string
+          format: date
+        active:
+          type: boolean
+        role:
+         type: string
+         enum:
+           - role_student
+           - role_teacher
+           - role_admin
+
+    ErrorMessageDto:
+      type: object
+      properties:
+        message:
+          type: string
 
 
 

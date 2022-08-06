@@ -3,7 +3,10 @@ package ru.neoflex.educationplatform.api.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.openapitools.api.UsersApi;
+import org.openapitools.model.TokenDto;
 import org.openapitools.model.UserAllInfoResponseDto;
+import org.openapitools.model.UserLoginDto;
+import org.openapitools.model.UserRegistrationDto;
 import org.openapitools.model.UserRequestDto;
 import org.openapitools.model.UserResponseDto;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +34,16 @@ public class UserController implements UsersApi {
     @Override
     public ResponseEntity<UserAllInfoResponseDto> updateUser(UserRequestDto userRequestDto) {
         return ResponseEntity.ok(userService.updateUser(userRequestDto));
+    }
+
+    @Override
+    public ResponseEntity<TokenDto> login(UserLoginDto userLoginDto) {
+        return ResponseEntity.ok(userService.login(userLoginDto));
+    }
+
+    @Override
+    public ResponseEntity<Void> registration(UserRegistrationDto userRegistrationDto) {
+        userService.registration(userRegistrationDto);
+        return ResponseEntity.ok().build();
     }
 }

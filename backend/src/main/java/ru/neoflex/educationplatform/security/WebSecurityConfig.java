@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -30,23 +31,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .cors().disable()
             .authorizeRequests()
 
-            .anyRequest().permitAll();
+//            .anyRequest().permitAll();
 
-//            .antMatchers("/auth/login").permitAll()
-//            .antMatchers("/auth/registration").permitAll()
-//            .anyRequest().authenticated()
-//            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//            .and().exceptionHandling().accessDeniedPage("/auth/login")
-//            .and().apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
+            .antMatchers("/users/login").permitAll()
+            .antMatchers("/users/registration").permitAll()
+            .antMatchers("/courses/available").permitAll()
+            .anyRequest().authenticated()
+            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and().exceptionHandling().accessDeniedPage("/users/login")
+            .and().apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
   }
 
   @Override
   public void configure(WebSecurity web) throws Exception {
-    web.ignoring().antMatchers("/v2/api-docs")//
-        .antMatchers("/swagger-resources/**")//
-        .antMatchers("/swagger-ui.html")//
-        .antMatchers("/configuration/**")//
-        .antMatchers("/webjars/**")//
+    web.ignoring()
+        .antMatchers("/v2/api-docs/**")
+        .antMatchers("/v3/api-docs/**")
+        .antMatchers("/swagger-resources/**")
+        .antMatchers("/swagger-ui.html")
+        .antMatchers("/swagger-ui/**")
+        .antMatchers("/swagger-ui/index.html")
+        .antMatchers("/configuration/**")
+        .antMatchers("/webjars/**")
         .antMatchers("/public");
   }
 

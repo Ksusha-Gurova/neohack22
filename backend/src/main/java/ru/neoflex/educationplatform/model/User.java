@@ -8,12 +8,14 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
@@ -69,12 +71,6 @@ public class User {
     @OneToMany(mappedBy = "teacher")
     private Set<Lesson> lessonsAsTeacher = new LinkedHashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "user_role_link",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new LinkedHashSet<>();
-
     @OneToMany(mappedBy = "user")
     private Set<UserQuestionAnswerLink> userQuestionAnswerLinks = new LinkedHashSet<>();
 
@@ -96,5 +92,12 @@ public class User {
 
     @OneToMany(mappedBy = "author")
     private Set<Course> courses = new LinkedHashSet<>();
+
+    @Column(name = "last_visit_date")
+    private LocalDate lastVisitDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id")
+    private Role role;
 
 }

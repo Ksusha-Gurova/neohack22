@@ -1,16 +1,30 @@
 package ru.neoflex.educationplatform.service;
 
 import lombok.RequiredArgsConstructor;
+import org.openapitools.model.TokenDto;
 import org.openapitools.model.UserAllInfoResponseDto;
+import org.openapitools.model.UserLoginDto;
+import org.openapitools.model.UserRegistrationDto;
 import org.openapitools.model.UserRequestDto;
 import org.openapitools.model.UserResponseDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.neoflex.educationplatform.exception.CustomException;
 import ru.neoflex.educationplatform.mapper.UserMapper;
+import ru.neoflex.educationplatform.model.Role;
 import ru.neoflex.educationplatform.model.User;
+import ru.neoflex.educationplatform.repository.RoleRepository;
 import ru.neoflex.educationplatform.repository.UserRepository;
+import ru.neoflex.educationplatform.security.JwtTokenProvider;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,6 +33,11 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final RoleRepository roleRepository;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final AuthenticationManager authenticationManager;
+    private final UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserResponseDto> getAllUsers() {
@@ -42,6 +61,28 @@ public class UserServiceImpl implements UserService {
         } else {
             User save = userRepository.save(userMapper.mapEntityFromUserRequestDto(userRequestDto));
             return userMapper.mapEntityToUserAllInfoResponseDto(save);
+        }
+    }
+
+    @Override
+    public TokenDto login(UserLoginDto userLoginDto) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userLoginDto.getEmail(), userLoginDto.getPassword()));
+            return TokenDto.builder()
+                    .token(jwtTokenProvider.createToken(userDetailsService.loadUserByUsername(userLoginDto.getEmail())))
+                    .build();
+        } catch (AuthenticationException e) {
+            throw new CustomException("Invalid username/password supplied", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public void registration(UserRegistrationDto userRegistrationDto) {
+        if (userRepository.existsByEmail(userRegistrationDto.getEmail())) {
+            throw new CustomException("Пользователь с таким email уже существует", HttpStatus.BAD_REQUEST);
+        } else {
+            Role role = roleRepository.findByName(userRegistrationDto.getRole().getValue().toUpperCase(Locale.ROOT));
+            userRepository.save(userMapper.mapUserRegistrationDtoToEntity(userRegistrationDto, role, passwordEncoder.encode(userRegistrationDto.getPassword())));
         }
     }
 }
