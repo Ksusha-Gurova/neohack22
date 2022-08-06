@@ -26,6 +26,11 @@ docker-build:
     # build backend
     - docker build -t $CI_REGISTRY_IMAGE:"backend-"$CI_COMMIT_SHORT_SHA ./backend
     - docker push $CI_REGISTRY_IMAGE:"backend-"$CI_COMMIT_SHORT_SHA
+
+    # build frontend
+    - docker build -t $CI_REGISTRY_IMAGE:"frontend-"$CI_COMMIT_SHORT_SHA ./frontend
+    - docker push $CI_REGISTRY_IMAGE:"frontend-"$CI_COMMIT_SHORT_SHA
+
   # allow_failure: true
 
 
@@ -33,8 +38,8 @@ docker-build:
 docker-test:
   stage: test
   ######################
-  # rules:
-  #  - when: never
+  rules:
+   - when: never
   #####################
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -48,8 +53,8 @@ docker-test:
 deploy-to-kuber:
   stage: deploy
   ######################
-  # rules:
-  #   - when: never
+  rules:
+    - when: never
   #####################
   image:
     name: bitnami/kubectl:latest
