@@ -48,8 +48,8 @@ docker-test:
 deploy-to-kuber:
   stage: deploy
   ######################
-  rules:
-    - when: never
+  # rules:
+  #   - when: never
   #####################
   image:
     name: bitnami/kubectl:latest
