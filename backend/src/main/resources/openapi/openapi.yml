@@ -374,6 +374,22 @@ paths:
                 items:
                   $ref: "#/components/schemas/AnswerAllInfo"
 
+  /tags:
+    get:
+      tags:
+        - tags
+      summary: теги (интересы)
+      operationId: getAllTags
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SimpleResponseDto"
+
 
 #  /statistics/courses:
 #  /statistics/courses/{id}:
