@@ -47,7 +47,7 @@ public class Lesson {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "course_id", nullable = false)
-    private Cours course;
+    private Course course;
 
     @Column(name = "private", nullable = false)
     private Boolean isPrivate = false;
@@ -77,5 +77,9 @@ public class Lesson {
     @OneToMany(mappedBy = "lesson")
     private Set<Task> tasks = new LinkedHashSet<>();
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author")
+    private User author;
 
 }
