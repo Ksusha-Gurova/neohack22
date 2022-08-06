@@ -78,10 +78,10 @@ deploy-to-kuber:
 
     # create docker-registry secret
     - kubectl create secret docker-registry regcred --docker-server=$CI_REGISTRY --docker-username=$CI_REGISTRY_USER --docker-password=$CI_REGISTRY_PASSWORD --docker-email="test@test.test" -n $KUBER_NAMESPACE
-    # - |
-    #   eval "cat << EOF       
-    #   $(cat manifests/*.yaml)
-    #   EOF" | kubectl apply -f -
-    - kubectl apply -f ./manifests/backend.yaml
-    - kubectl apply -f ./manifests/frontend.yaml
+    - |
+      eval "cat << EOF       
+      $(cat manifests/*.yaml)
+      EOF" | kubectl apply -f -
+    # - kubectl apply -f ./manifests/backend.yaml
+    # - kubectl apply -f ./manifests/frontend.yaml
     
