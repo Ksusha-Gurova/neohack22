@@ -18,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer{
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
   private final JwtTokenProvider jwtTokenProvider;
 
@@ -61,11 +61,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
     return super.authenticationManagerBean();
   }
 
-  @Override
-  public void addCorsMappings(CorsRegistry registry) {
-    registry.addMapping("/**")
-            .allowedOrigins("http://localhost:8880", "http://localhost:8080", "http://localhost:3000")
-            .allowedMethods("*");
-    WebMvcConfigurer.super.addCorsMappings(registry);
-  }
 }
