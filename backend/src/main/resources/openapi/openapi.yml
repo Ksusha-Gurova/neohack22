@@ -572,6 +572,12 @@ components:
           format: date-time
         description:
           type: string
+        name:
+          type: string
+        questions:
+          type: array
+          items:
+            $ref: "#/components/schemas/SimpleResponseDto"
 
     QuestionAllInfo:
       type: object
@@ -649,7 +655,8 @@ components:
         questions:
           type: array
           items:
-            $ref: "#/components/schemas/SimpleResponseDto"
+            type: integer
+            format: int64
 
     SimpleResponseDto:
       type: object
