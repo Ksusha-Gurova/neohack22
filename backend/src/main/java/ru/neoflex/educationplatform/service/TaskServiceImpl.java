@@ -1,14 +1,14 @@
 package ru.neoflex.educationplatform.service;
 
 import lombok.RequiredArgsConstructor;
-import org.openapitools.model.QuestionAllInfo;
+import org.openapitools.model.AnswerAllInfo;
 import org.openapitools.model.TaskRequestDto;
 import org.openapitools.model.TasksAllInfo;
 import org.springframework.stereotype.Service;
 import ru.neoflex.educationplatform.mapper.TaskMapper;
-import ru.neoflex.educationplatform.model.Question;
+import ru.neoflex.educationplatform.model.Answer;
 import ru.neoflex.educationplatform.model.Task;
-import ru.neoflex.educationplatform.repository.QuestionRepository;
+import ru.neoflex.educationplatform.repository.AnswerRepository;
 import ru.neoflex.educationplatform.repository.TaskRepository;
 
 import javax.persistence.EntityNotFoundException;
@@ -20,7 +20,7 @@ import java.util.List;
 public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository taskRepository;
-    private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
     private final TaskMapper taskMapper;
 
     @Override
@@ -29,7 +29,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<QuestionAllInfo> getQuestionsByTaskId(Long id) {
+    public List<AnswerAllInfo> getAnswersByTaskId(Long id) {
         return null;
     }
 
@@ -43,7 +43,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TasksAllInfo saveOrUpdateTask(TaskRequestDto taskRequestDto) {
         Task task;
-        List<Question> questions = questionRepository.findAllByIdIn(taskRequestDto.getQuestions());
+        List<Answer> questions = answerRepository.findAllByIdIn(taskRequestDto.getAnswers());
         if (taskRequestDto.getId() != null) {
             task = taskRepository.findById(taskRequestDto.getId())
                     .map(t -> taskMapper.updateTaskFromRequestDto(t, taskRequestDto, questions))

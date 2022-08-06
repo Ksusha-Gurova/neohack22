@@ -33,13 +33,12 @@ public class Answer {
     @Column(name = "answer_text", nullable = false)
     private String answerText;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "task_id", nullable = false)
-    private Question question;
-
     @Column(name = "correct", nullable = false)
     private Boolean correct = false;
 
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "task_id", nullable = false)
+    private Task task;
 
 }

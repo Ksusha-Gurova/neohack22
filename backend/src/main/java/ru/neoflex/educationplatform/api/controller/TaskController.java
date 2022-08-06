@@ -2,7 +2,7 @@ package ru.neoflex.educationplatform.api.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.openapitools.api.TasksApi;
-import org.openapitools.model.QuestionAllInfo;
+import org.openapitools.model.AnswerAllInfo;
 import org.openapitools.model.TaskRequestDto;
 import org.openapitools.model.TasksAllInfo;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +24,8 @@ public class TaskController implements TasksApi {
     }
 
     @Override
-    public ResponseEntity<List<QuestionAllInfo>> getQuestionsByTaskId(Long id) {
-        return ResponseEntity.ok(taskService.getQuestionsByTaskId(id));
+    public ResponseEntity<List<AnswerAllInfo>> getAnswersByTaskId(Long id) {
+        return ResponseEntity.ok(taskService.getAnswersByTaskId(id));
     }
 
     @Override

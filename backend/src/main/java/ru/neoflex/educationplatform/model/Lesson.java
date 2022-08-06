@@ -37,18 +37,9 @@ public class Lesson {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "start_date", nullable = false)
-    private LocalDateTime startDate;
-
-    @Column(name = "duration", nullable = false)
-    private Integer duration;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
-
-    @Column(name = "private", nullable = false)
-    private Boolean isPrivate = false;
 
     @Column(name = "content_type", nullable = false)
     private String contentType;
@@ -59,12 +50,6 @@ public class Lesson {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "teacher", nullable = false)
     private User teacher;
-
-    @Column(name = "cover", nullable = false)
-    private String cover;
-
-    @Column(name = "publication_date", nullable = false)
-    private LocalDate publicationDate;
 
     @Column(name = "status", nullable = false)
     private String status;

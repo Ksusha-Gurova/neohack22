@@ -60,9 +60,6 @@ public class User {
     private Boolean active = false;
 
     @OneToMany(mappedBy = "user")
-    private Set<UserTaskLink> userTaskLinks = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "user")
     private Set<UserLessonLink> userLessonLinks = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "teacher")

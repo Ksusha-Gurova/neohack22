@@ -40,16 +40,7 @@ public class Task {
     @Column(name = "question", nullable = false)
     private String name;
 
-    @Column(name = "deadline", nullable = false)
-    private LocalDateTime deadline;
-
-    @Column(name = "description", nullable = false)
-    private String description;
-
     @OneToMany(mappedBy = "task")
-    private Set<UserTaskLink> userTaskLinks = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "task")
-    private Set<Question> questions = new LinkedHashSet<>();
+    private Set<Answer> answers = new LinkedHashSet<>();
 
 }
