@@ -272,7 +272,7 @@ components:
         status:
           type: string
           enum:
-            - avialable
+            - available
             - temporarily_unavailable
             - unavailable
         interestTags:
@@ -308,7 +308,7 @@ components:
         status:
           type: string
           enum:
-            - avialable
+            - available
             - temporarily_unavailable
             - unavailable
         interestTags:
