@@ -10,9 +10,8 @@ export const Footer = () => {
         <div className='footer'>
             <div className='content-footer'>
                 <div className='card-content'>
-                    <div className='brand'>
-                        IT-BRAINS
-                    </div>
+                    <a href='/'>IT-BRAINS</a>
+
                     <div>
                         <ul className='menu-footer'>
                             <li>

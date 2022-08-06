@@ -159,25 +159,8 @@ export default function PrimarySearchAppBar() {
         <Box sx={ { flexGrow: 1 } }>
             <AppBar sx={ { pb: 2, background: '#9d88fc' } } position="static">
                 <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        sx={ { mr: 2 } }
-                    >
-                        <MenuIcon/>
-                    </IconButton>
-                    <Typography
-                        className='brand'
-                        variant="h5"
-                        // noWrap
-                        component="div"
-                        sx={ { display: { xs: 'none', sm: 'block' } } }
-                    >
-                        IT-BRAINS
-                    </Typography>
-                    <img className='logo-img' src={brain}/>
+                        <a href='/'>IT-BRAINS</a>
+                    <img className='logo-img' src={brain} width={50}/>
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon/>
@@ -187,6 +170,7 @@ export default function PrimarySearchAppBar() {
                             inputProps={ { 'aria-label': 'search' } }
                         />
                     </Search>
+                    <a href='/theme'>Курсы</a>
                     <Box sx={ { flexGrow: 1 } }/>
                     <Box sx={ { display: { xs: 'none', md: 'flex' } } }>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
