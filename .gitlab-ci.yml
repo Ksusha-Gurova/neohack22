@@ -69,4 +69,3 @@ deploy-to-kuber:
       eval "cat << EOF       
       $(cat manifests/*.yaml)
       EOF" | kubectl apply -f -
-    
