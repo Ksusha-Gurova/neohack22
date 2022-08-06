@@ -5,6 +5,7 @@ import {LoginForm} from "./loginForm";
 export const Auth = () => {
     return (
         <div>
+            {/*<AuthHeader/>*/}
             <RegistrationForm/>
             <LoginForm/>
         </div>

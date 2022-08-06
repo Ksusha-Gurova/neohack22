@@ -1,7 +1,4 @@
 import React from "react";
-import tlg from '../image/Telegram.png'
-import vk from '../image/VK.png'
-import ws from '../image/Whatsapp.png'
 import { Link } from 'react-router-dom';
 
 
@@ -10,8 +7,7 @@ export const Footer = () => {
         <div className='footer'>
             <div className='content-footer'>
                 <div className='card-content'>
-                    <a href='/'>IT-BRAINS</a>
-
+                    <a className='brand' href='/'>IT-BRAINS</a>
                     <div>
                         <ul className='menu-footer'>
                             <li>
@@ -36,17 +32,6 @@ export const Footer = () => {
                             </span>
                             </li>
                         </ul>
-                    </div>
-                    <div>
-                        <Link className='link-footer' to='/'>
-                            <img className='social-network' src={ vk } width='31px'/>
-                        </Link>
-                        <Link className='link-footer' to='/'>
-                            <img className='social-network' src={ tlg }/>
-                        </Link>
-                        <Link className='link-footer' to='/'>
-                            <img className='social-network' src={ ws }/>
-                        </Link>
                     </div>
                 </div>
             </div>

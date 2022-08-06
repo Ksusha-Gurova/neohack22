@@ -5,14 +5,10 @@ import {EMAIL_REGEXP} from "../utils/consts";
 export const LoginForm = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
-    const password = useRef({});
-    password.current = watch("password", "");
-
     const onSubmit = data => console.log(data);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-
             <br/>
             <label>Email</label>
             <input {...register("email", {
@@ -31,17 +27,6 @@ export const LoginForm = () => {
                 }
             })} />
             {errors.password && <span>{errors.password.message}</span>}
-
-            <br/>
-            <label>Repeat password</label>
-            <input type="password" {...register("password_repeat",{
-                    validate: value =>
-                        value === password.current || "The passwords do not match"
-                })}
-            />
-            {errors.password_repeat && <p>{errors.password_repeat.message}</p>}
-
-
             <input type="submit" />
         </form>
     );

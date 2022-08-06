@@ -157,9 +157,9 @@ export default function PrimarySearchAppBar() {
 
     return (
         <Box sx={ { flexGrow: 1 } }>
-            <AppBar sx={ { pb: 2, background: '#9d88fc' } } position="static">
+            <AppBar sx={ { background: '#9d88fc' } } position="static">
                 <Toolbar>
-                        <a href='/'>IT-BRAINS</a>
+                        <a className='brand' href='/'>IT-BRAINS</a>
                     <img className='logo-img' src={brain} width={50}/>
                     <Search>
                         <SearchIconWrapper>
