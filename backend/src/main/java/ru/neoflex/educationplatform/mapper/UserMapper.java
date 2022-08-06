@@ -1,6 +1,7 @@
 package ru.neoflex.educationplatform.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.openapitools.model.UserAllInfoResponseDto;
 import org.openapitools.model.UserRequestDto;
@@ -16,5 +17,9 @@ public interface UserMapper {
 
     User mapEntityFromUserRequestDto(UserRequestDto userRequestDto);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "password", ignore = true)
+    @Mapping(target = "registrationDate", ignore = true)
+    @Mapping(target = "active", ignore = true)
     User updateEntityFromUserRequestDto(@MappingTarget User user, UserRequestDto userRequestDto);
 }

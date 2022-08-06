@@ -36,7 +36,8 @@ public class UserServiceImpl implements UserService {
         if (userRequestDto.getId() != null){
             User user = userRepository.findById(userRequestDto.getId())
                     .orElseThrow(() -> new EntityNotFoundException("В базе нет пользователя с id " + userRequestDto.getId()));
-            user = userRepository.save(userMapper.updateEntityFromUserRequestDto(user, userRequestDto));
+            User user1 = userMapper.updateEntityFromUserRequestDto(user, userRequestDto);
+            user = userRepository.save(user1);
             return userMapper.mapEntityToUserAllInfoResponseDto(user);
         } else {
             User save = userRepository.save(userMapper.mapEntityFromUserRequestDto(userRequestDto));

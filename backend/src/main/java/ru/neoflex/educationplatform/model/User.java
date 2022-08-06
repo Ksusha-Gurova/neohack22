@@ -67,7 +67,7 @@ public class User {
     private Set<UserLessonLink> userLessonLinks = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "teacher")
-    private Set<Lesson> lessons = new LinkedHashSet<>();
+    private Set<Lesson> lessonsAsTeacher = new LinkedHashSet<>();
 
     @ManyToMany
     @JoinTable(name = "user_role_link",
@@ -88,7 +88,13 @@ public class User {
     @JoinTable(name = "user_course_link",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private Set<Cours> courses = new LinkedHashSet<>();
+    private Set<Course> coursesAsStudent = new LinkedHashSet<>();
 
+
+    @OneToMany(mappedBy = "author")
+    private Set<Lesson> lessonsAsAuthor = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "author")
+    private Set<Course> courses = new LinkedHashSet<>();
 
 }
