@@ -9,8 +9,6 @@
 #       image: "$CI_REGISTRY_IMAGE:nginx-1-$CI_COMMIT_SHORT_SHA"
 #   imagePullSecrets:
 #     - name: regcred
-    
-
 # apiVersion: apps/v1
 # kind: Deployment
 # metadata:
@@ -35,9 +33,6 @@
 #         - containerPort: 8080
 #       imagePullSecrets:
 #       - name: regcred
-
-# ---
-
 # apiVersion: v1
 # kind: Service
 # metadata:
