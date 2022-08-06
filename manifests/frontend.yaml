@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1beta
 kind: Ingress
 metadata:
   name: minimal-ingress
@@ -23,6 +23,8 @@ spec:
               port:
                 number: 80
 
+---
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -35,6 +37,8 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
+
+---
 
 apiVersion: apps/v1
 kind: Deployment
