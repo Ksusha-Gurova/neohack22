@@ -125,7 +125,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/CourseAllInfoResponseDto"
 
-  /courses/{id}/lessons:
     delete:
       tags:
         - courses
@@ -142,8 +141,8 @@ paths:
       responses:
         "200":
           description: OK
-#
-#  /lessons:
+
+#  /courses/{id}/lessons:
 #  /lessons/{id}:
 #  /lessons/{id}/tasks:
 #
