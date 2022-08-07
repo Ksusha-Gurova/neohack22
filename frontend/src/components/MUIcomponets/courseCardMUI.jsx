@@ -15,20 +15,24 @@ export const CourseCardMUI = ({courseInfo}) => {
 
     return (
         <Card sx={ { minWidth: 275 } }>
-            <CardContent    >
+            <CardContent>
                 <Typography sx={ { fontSize: 14 } } color="text.secondary" gutterBottom>
                     {courseInfo.status}
                 </Typography>
+
                 <Typography variant="h5" component="div">
                     {courseInfo.name}
                 </Typography>
+
                 <Typography sx={ { mb: 1.5 } } color="text.secondary">
                     {courseInfo.interestTags.map(it => it.name+ ", ")}
                 </Typography>
+
                 <Typography variant="body2">
                     {courseInfo.description}
                 </Typography>
             </CardContent>
+
             <Button size="small" onClick={handleClick}>Learn More</Button>
         </Card>
     );

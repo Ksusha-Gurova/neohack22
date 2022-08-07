@@ -9,7 +9,7 @@ import {
     ROOT,
     STATISTICS_ROUTE,
     TEST_ROUTE,
-    COURSE_ROUTE
+    COURSE_ROUTE, CREATE_COURSE_ROUTE
 } from '../utils/consts';
 import { CourseContainer } from './courseContainer';
 import { MainComponent } from '../components/mainComponent';
@@ -24,12 +24,12 @@ import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { AuthHeader } from '../components/authHeader';
 import {isTokenValid} from "../api/axios/jwt/jwtLocalStorage";
+import { CreateCourse } from '../components/createCourse';
 
 export const AppRouter = () => {
     const dispatch = useDispatch();
     const [isAuth, setAuth] = useState(
         isTokenValid
-        // false
     )
 
     useEffect(() => {
@@ -53,6 +53,7 @@ export const AppRouter = () => {
                 <Route path={STATISTICS_ROUTE} exact component={StatisticContainer}/>
                 <Route path={EFFICIENCY_DASHBOARD_ROUTE} exact component={EfficiencyDashboardContainer}/>
                 <Route path={FORUM_ROUTE} exact component={ForumContainer}/>
+                <Route path={CREATE_COURSE_ROUTE} exact component={CreateCourse}/>
                 <Redirect to={ ROOT }/>
             </Switch>
                 <Footer/>

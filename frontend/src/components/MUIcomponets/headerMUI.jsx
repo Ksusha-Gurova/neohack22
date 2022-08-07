@@ -63,8 +63,6 @@ export default function PrimarySearchAppBar() {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const history = useHistory()
 
-
-
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -95,6 +93,7 @@ export default function PrimarySearchAppBar() {
     };
 
     const menuId = 'primary-search-account-menu';
+
     const renderMenu = (
         <Menu
             anchorEl={ anchorEl }
@@ -128,6 +127,7 @@ export default function PrimarySearchAppBar() {
     );
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
+
     const renderMobileMenu = (
         <Menu
             anchorEl={ mobileMoreAnchorEl }
@@ -152,6 +152,7 @@ export default function PrimarySearchAppBar() {
                 </IconButton>
                 <p>Messages</p>
             </MenuItem>
+
             <MenuItem>
                 <IconButton
                     size="large"
@@ -164,6 +165,7 @@ export default function PrimarySearchAppBar() {
                 </IconButton>
                 <p>Notifications</p>
             </MenuItem>
+
             <MenuItem onClick={ handleProfileMenuOpen }>
                 <IconButton
                     size="large"
@@ -184,7 +186,9 @@ export default function PrimarySearchAppBar() {
             <AppBar sx={ { background: '#9d88fc' } } position="static">
                 <Toolbar>
                     <a className='brand' href='/'>IT-BRAINS</a>
+
                     <img className='logo-img' src={ brain } width={ 50 }/>
+
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon/>
@@ -194,13 +198,16 @@ export default function PrimarySearchAppBar() {
                             inputProps={ { 'aria-label': 'search' } }
                         />
                     </Search>
+
                     <a href={ COURSE_ROUTE }>Курсы</a>
                     <a href={ FORUM_ROUTE }>Форум</a>
                     <Box sx={ { flexGrow: 1 } }/>
                     <Box sx={ { display: { xs: 'none', md: 'flex' } } }>
+
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                                 <MailIcon/>
                         </IconButton>
+
                         <IconButton
                             size="large"
                             aria-label="show 17 new notifications"
@@ -208,6 +215,7 @@ export default function PrimarySearchAppBar() {
                         >
                                 <NotificationsIcon/>
                         </IconButton>
+
                         <IconButton
                             size="large"
                             edge="end"
@@ -220,6 +228,7 @@ export default function PrimarySearchAppBar() {
                             <AccountCircle/>
                         </IconButton>
                     </Box>
+
                     <Box sx={ { display: { xs: 'flex', md: 'none' } } }>
                         <IconButton
                             size="large"

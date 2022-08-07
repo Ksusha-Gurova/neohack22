@@ -13,7 +13,6 @@ body {
     overflow-x: hidden;
 }
 
-
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -88,7 +87,6 @@ p {
     text-decoration: none;
     color: #ffffff;
     cursor: pointer;
-
 }
 
 .link-footer:hover {
@@ -213,5 +211,12 @@ p {
 
 .create-course {
     min-width: 195px;
+    margin-left: 15px;
+}
 
+.link-back {
+    text-decoration: underline;
+    cursor: pointer;
+    position: absolute;
+    color: #282c34;
 }
