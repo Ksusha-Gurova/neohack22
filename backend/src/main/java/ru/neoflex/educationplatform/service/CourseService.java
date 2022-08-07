@@ -1,7 +1,8 @@
 package ru.neoflex.educationplatform.service;
 
 import org.openapitools.model.CourseAllInfoResponseDto;
-import org.openapitools.model.CourseRequestDto;
+import org.openapitools.model.CourseCreateRequestDto;
+import org.openapitools.model.CourseUpdateRequestDto;
 import org.openapitools.model.LessonAllInfo;
 
 import java.util.List;
@@ -13,7 +14,9 @@ public interface CourseService {
 
     CourseAllInfoResponseDto getCourse(Long id);
 
-    CourseAllInfoResponseDto updateCourse(CourseRequestDto courseRequestDto);
+    CourseAllInfoResponseDto updateCourse(CourseUpdateRequestDto courseRequestDto);
 
     List<LessonAllInfo> getLessonsByCourseId(Long id);
+
+    CourseAllInfoResponseDto createCourse(CourseCreateRequestDto courseCreateRequestDto);
 }

@@ -1,7 +1,8 @@
 package ru.neoflex.educationplatform.service;
 
 import org.openapitools.model.AnswerAllInfo;
-import org.openapitools.model.TaskRequestDto;
+import org.openapitools.model.TaskCreateRequestDto;
+import org.openapitools.model.TaskUpdateRequestDto;
 import org.openapitools.model.TasksAllInfo;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface TaskService {
 
     TasksAllInfo getTaskById(Long id);
 
-    TasksAllInfo saveOrUpdateTask(TaskRequestDto taskRequestDto);
+    void updateTask(TaskUpdateRequestDto taskRequestDto);
+
+    void createTask(TaskCreateRequestDto taskCreateRequestDto);
 }

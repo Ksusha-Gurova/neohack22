@@ -3,7 +3,8 @@ package ru.neoflex.educationplatform.api.controller;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.api.TasksApi;
 import org.openapitools.model.AnswerAllInfo;
-import org.openapitools.model.TaskRequestDto;
+import org.openapitools.model.TaskCreateRequestDto;
+import org.openapitools.model.TaskUpdateRequestDto;
 import org.openapitools.model.TasksAllInfo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +35,14 @@ public class TaskController implements TasksApi {
     }
 
     @Override
-    public ResponseEntity<TasksAllInfo> saveOrUpdateTask(TaskRequestDto taskRequestDto) {
-        return ResponseEntity.ok(taskService.saveOrUpdateTask(taskRequestDto));
+    public ResponseEntity<Void> updateTask(TaskUpdateRequestDto taskUpdateRequestDto) {
+        taskService.updateTask(taskUpdateRequestDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> createTask(TaskCreateRequestDto taskCreateRequestDto) {
+        taskService.createTask(taskCreateRequestDto);
+        return ResponseEntity.ok().build();
     }
 }
