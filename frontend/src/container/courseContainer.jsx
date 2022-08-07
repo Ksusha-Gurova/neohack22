@@ -17,7 +17,7 @@ export const CourseContainer = () => {
     console.log(getRoleFromToken())
 
     return (
-        <div>
+        <div className='container-course'>
             <Grid container spacing={ { xs: 2 } } columns={ { xs: 1, sm: 8, md: 12 } }
                   sx={ { p: 5, background: '#f3fbff' } }>
                 { courses.map((courseInfo) => {
@@ -29,6 +29,7 @@ export const CourseContainer = () => {
                     }
                 ) }
             </Grid>
+            <button className='btn-submit create-course'>Создать курс</button>
         </div>
     );
 };
