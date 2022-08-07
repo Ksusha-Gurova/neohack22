@@ -16,7 +16,8 @@ public class SimpleCorsFilter implements Filter {
 
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) res;
-        response.setHeader("Access-Control-Allow-Origin", "*, http://localhost:8880, http://localhost:8080, http://localhost:3000");
+//        response.setHeader("Access-Control-Allow-Origin", "*, http://localhost:8880, http://localhost:8080, http://localhost:3000");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, PATCH");
         response.setHeader("Access-Control-Max-Age", "360000");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
