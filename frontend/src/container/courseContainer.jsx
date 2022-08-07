@@ -3,7 +3,7 @@ import {CourseCardMUI} from '../components/MUIcomponets/courseCardMUI';
 import { Grid } from '@mui/material';
 import {axiosGetAllAvailableCourses} from "../api/axios/axiosClient";
 
-export const ThemeContainer = () => {
+export const CourseContainer = () => {
 
     const [courses, setCourses] = useState([])
     useEffect(() => {

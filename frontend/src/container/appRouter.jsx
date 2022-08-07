@@ -9,9 +9,9 @@ import {
     ROOT,
     STATISTICS_ROUTE,
     TEST_ROUTE,
-    THEME_ROUTE
+    COURSE_ROUTE
 } from '../utils/consts';
-import { ThemeContainer } from './themeContainer';
+import { CourseContainer } from './courseContainer';
 import { MainComponent } from '../components/mainComponent';
 import { TestContainer } from './testContainer';
 import { ProfileContainer } from './profileContainer';
@@ -47,7 +47,7 @@ export const AppRouter = () => {
             <Switch>
                 <Route path={ROOT} exact component={MainComponent}/>
                 <Route path={TEST_ROUTE} exact component={TestContainer}/>
-                <Route path={THEME_ROUTE} exact component={ThemeContainer}/>
+                <Route path={COURSE_ROUTE} exact component={CourseContainer}/>
                 <Route path={PROFILE_ROUTE} exact component={ProfileContainer}/>
                 <Route path={LEARNING_ROUTE} exact component={LearningContainer}/>
                 <Route path={STATISTICS_ROUTE} exact component={StatisticContainer}/>

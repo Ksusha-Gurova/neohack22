@@ -17,7 +17,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import brain from '../../image/265-2656199_brain-icon-hd-png-download-PhotoRoom.png'
 import { useHistory } from 'react-router-dom';
-import { PROFILE_ROUTE } from '../../utils/consts';
+import {COURSE_ROUTE, PROFILE_ROUTE} from '../../utils/consts';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -180,8 +180,8 @@ export default function PrimarySearchAppBar() {
                             inputProps={ { 'aria-label': 'search' } }
                         />
                     </Search>
-                    <a href='/theme'>Курсы</a>
-                    <a href='/theme'>Форум</a>
+                    <a href={COURSE_ROUTE}>Курсы</a>
+                    <a href={COURSE_ROUTE}>Форум</a>
                     <Box sx={ { flexGrow: 1 } }/>
                     <Box sx={ { display: { xs: 'none', md: 'flex' } } }>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
