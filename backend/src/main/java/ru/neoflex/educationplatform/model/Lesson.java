@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.neoflex.educationplatform.model.enums.ContentType;
-import ru.neoflex.educationplatform.model.enums.LessonStatus;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,21 +37,12 @@ public class Lesson {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "start_date", nullable = false)
-    private LocalDateTime startDate;
-
-    @Column(name = "duration", nullable = false)
-    private Integer duration;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
-    @Column(name = "private", nullable = false)
-    private Boolean isPrivate = false;
-
     @Column(name = "content_type", nullable = false)
-    private ContentType contentType;
+    private String contentType;
 
     @Column(name = "content", nullable = false)
     private String content;
@@ -62,14 +51,8 @@ public class Lesson {
     @JoinColumn(name = "teacher", nullable = false)
     private User teacher;
 
-    @Column(name = "cover", nullable = false)
-    private String cover;
-
-    @Column(name = "publication_date", nullable = false)
-    private LocalDate publicationDate;
-
     @Column(name = "status", nullable = false)
-    private LessonStatus status;
+    private String status;
 
     @OneToMany(mappedBy = "lesson")
     private Set<UserLessonLink> userLessonLinks = new LinkedHashSet<>();

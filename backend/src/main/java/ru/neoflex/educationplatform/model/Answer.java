@@ -14,15 +14,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.LinkedHashSet;
-import java.util.Set;
+
 
 @Getter
 @Setter
 @Entity
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "answers", schema = "education_platform")
@@ -35,15 +33,12 @@ public class Answer {
     @Column(name = "answer_text", nullable = false)
     private String answerText;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "question_id", nullable = false)
-    private Question question;
-
     @Column(name = "correct", nullable = false)
     private Boolean correct = false;
 
-    @OneToMany(mappedBy = "answer")
-    private Set<UserQuestionAnswerLink> userQuestionAnswerLinks = new LinkedHashSet<>();
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "task_id", nullable = false)
+    private Task task;
 
 }

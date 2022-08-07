@@ -37,19 +37,10 @@ public class Task {
     @JoinColumn(name = "lesson_id", nullable = false)
     private Lesson lesson;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "question", nullable = false)
     private String name;
 
-    @Column(name = "deadline", nullable = false)
-    private LocalDateTime deadline;
-
-    @Column(name = "description", nullable = false)
-    private String description;
-
     @OneToMany(mappedBy = "task")
-    private Set<UserTaskLink> userTaskLinks = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "task")
-    private Set<Question> questions = new LinkedHashSet<>();
+    private Set<Answer> answers = new LinkedHashSet<>();
 
 }

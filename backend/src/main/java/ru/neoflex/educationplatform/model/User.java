@@ -8,12 +8,14 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
@@ -48,9 +50,6 @@ public class User {
     @Column(name = "city", nullable = false)
     private String city;
 
-    @Column(name = "phone", nullable = false)
-    private String phone;
-
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -61,31 +60,24 @@ public class User {
     private Boolean active = false;
 
     @OneToMany(mappedBy = "user")
-    private Set<UserTaskLink> userTaskLinks = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "user")
     private Set<UserLessonLink> userLessonLinks = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "teacher")
     private Set<Lesson> lessonsAsTeacher = new LinkedHashSet<>();
-
-    @ManyToMany
-    @JoinTable(name = "user_role_link",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user")
     private Set<UserQuestionAnswerLink> userQuestionAnswerLinks = new LinkedHashSet<>();
 
     @ManyToMany
     @JoinTable(name = "users_interest_tag_link",
+            schema = "education_platform",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "interest_tag_id"))
     private Set<InterestTag> interestTags = new LinkedHashSet<>();
 
     @ManyToMany
     @JoinTable(name = "user_course_link",
+            schema = "education_platform",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
     private Set<Course> coursesAsStudent = new LinkedHashSet<>();
@@ -96,5 +88,12 @@ public class User {
 
     @OneToMany(mappedBy = "author")
     private Set<Course> courses = new LinkedHashSet<>();
+
+    @Column(name = "last_visit_date")
+    private LocalDate lastVisitDate;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
+    private Role role;
 
 }

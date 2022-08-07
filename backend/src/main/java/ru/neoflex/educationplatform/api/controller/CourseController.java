@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.openapitools.api.CoursesApi;
 import org.openapitools.model.CourseAllInfoResponseDto;
 import org.openapitools.model.CourseRequestDto;
+import org.openapitools.model.LessonAllInfo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.neoflex.educationplatform.service.CourseService;
@@ -35,5 +36,10 @@ public class CourseController implements CoursesApi {
     @Override
     public ResponseEntity<CourseAllInfoResponseDto> updateCourse(CourseRequestDto courseRequestDto) {
         return ResponseEntity.ok(courseService.updateCourse(courseRequestDto));
+    }
+
+    @Override
+    public ResponseEntity<List<LessonAllInfo>> getLessonsByCourseId(Long id) {
+        return ResponseEntity.ok(courseService.getLessonsByCourseId(id));
     }
 }
