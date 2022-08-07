@@ -7,6 +7,7 @@ import org.openapitools.model.LessonCreateRequestDto;
 import org.openapitools.model.LessonUpdateRequestDto;
 import org.openapitools.model.TasksAllInfo;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 import ru.neoflex.educationplatform.service.LessonService;
 
@@ -19,6 +20,7 @@ public class LessonController implements LessonsApi {
     private final LessonService lessonService;
 
     @Override
+    @PreAuthorize("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')")
     public ResponseEntity<Void> deleteLesson(Long id) {
         lessonService.deleteLesson(id);
         return ResponseEntity.ok().build();
@@ -35,11 +37,13 @@ public class LessonController implements LessonsApi {
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')")
     public ResponseEntity<LessonAllInfo> updateLesson(LessonUpdateRequestDto lessonsRequestDto) {
         return ResponseEntity.ok(lessonService.updateLesson(lessonsRequestDto));
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')")
     public ResponseEntity<LessonAllInfo> createLesson(LessonCreateRequestDto lessonCreateRequestDto) {
         return ResponseEntity.ok(lessonService.createLesson(lessonCreateRequestDto));
     }

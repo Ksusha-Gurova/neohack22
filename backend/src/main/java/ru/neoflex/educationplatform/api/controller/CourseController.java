@@ -7,6 +7,7 @@ import org.openapitools.model.CourseCreateRequestDto;
 import org.openapitools.model.CourseUpdateRequestDto;
 import org.openapitools.model.LessonAllInfo;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 import ru.neoflex.educationplatform.service.CourseService;
 
@@ -34,11 +35,13 @@ public class CourseController implements CoursesApi {
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')")
     public ResponseEntity<CourseAllInfoResponseDto> updateCourse(CourseUpdateRequestDto courseRequestDto) {
         return ResponseEntity.ok(courseService.updateCourse(courseRequestDto));
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')")
     public ResponseEntity<CourseAllInfoResponseDto> createCourse(CourseCreateRequestDto courseCreateRequestDto) {
         return ResponseEntity.ok(courseService.createCourse(courseCreateRequestDto));
     }

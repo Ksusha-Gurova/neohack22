@@ -7,6 +7,7 @@ import org.openapitools.model.TaskCreateRequestDto;
 import org.openapitools.model.TaskUpdateRequestDto;
 import org.openapitools.model.TasksAllInfo;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 import ru.neoflex.educationplatform.service.TaskService;
 
@@ -19,6 +20,7 @@ public class TaskController implements TasksApi {
     private final TaskService taskService;
 
     @Override
+    @PreAuthorize("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')")
     public ResponseEntity<Void> deleteTask(Long id) {
         taskService.deleteTaskById(id);
         return ResponseEntity.ok().build();
@@ -35,12 +37,14 @@ public class TaskController implements TasksApi {
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')")
     public ResponseEntity<Void> updateTask(TaskUpdateRequestDto taskUpdateRequestDto) {
         taskService.updateTask(taskUpdateRequestDto);
         return ResponseEntity.ok().build();
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')")
     public ResponseEntity<Void> createTask(TaskCreateRequestDto taskCreateRequestDto) {
         taskService.createTask(taskCreateRequestDto);
         return ResponseEntity.ok().build();
