@@ -15,17 +15,17 @@ export const Auth = () => {
                 ? (
                     <>
                         <RegistrationForm/>
-                        <p className='req-reg'> Already have account?
+                        <p className='req-reg'> Есть аккаунт?
                             <a className='info text-decoration-none' role='button'
-                               onClick={ toggleFormType }> Request authorization. </a>
+                               onClick={ toggleFormType }> Авторизоваться </a>
                         </p>
                     </>
                 ) : (
                     <>
                         <LoginForm/>
-                        <p className='req-reg'> Not a member?
+                        <p className='req-reg'> Нет аккаунта?
                             <a className='info text-decoration-none' role='button'
-                               onClick={ toggleFormType }> Request registration. </a>
+                               onClick={ toggleFormType }> Зарегистрироваться </a>
                         </p>
                     </>
                 )

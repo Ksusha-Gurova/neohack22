@@ -24,20 +24,20 @@ export const LoginForm = () => {
         <form className='container-form-auth' onSubmit={ handleSubmit(onSubmit) }>
             <h2>Войти</h2>
             <div className='container-radio-auth'>
-                <label className='label-auth'>Email</label>
+                <label className='label-auth'>Е-мэйл</label>
                 <input className='input-auth' { ...register("email", {
                     required: true,
                     pattern: EMAIL_REGEXP
                 }) } />
-                { errors.email && <span style={ { color: 'red' } }>email should be correct</span> }
+                { errors.email && <span style={ { color: 'red' } }>Электронная почта должна быть правильной</span> }
             </div>
             <div className='container-radio-auth'>
-                <label className='label-auth'>Password</label>
+                <label className='label-auth'>Пароль</label>
                 <input className='input-auth' type='password' { ...register("password", {
-                    required: "You must specify a password",
+                    required: "Вы должны указать пароль",
                     minLength: {
                         value: 8,
-                        message: "Password must have at least 8 characters"
+                        message: "Пароль должен содержать не менее 8 символов"
                     }
                 }) } />
                 { errors.password && <span style={ { color: 'red' } }>{ errors.password.message }</span> }

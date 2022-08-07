@@ -38,7 +38,7 @@ export const AppRouter = () => {
                 setAuth: setAuth
             }
         })
-    })
+    },[])
 
     return (
         isAuth ?

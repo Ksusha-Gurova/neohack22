@@ -27,6 +27,13 @@ export const isTokenValid = () => {
     }
 }
 
+export const getRoleFromToken = () => {
+    const token = localStorage.getItem('token');
+
+    const decoderToken = jwtDecoder(token)
+    return decoderToken.auth[0].authority
+}
+
 export const getToken = () => {
     return localStorage.getItem('token');
 }

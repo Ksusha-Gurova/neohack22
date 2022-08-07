@@ -4,12 +4,10 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
@@ -17,7 +15,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import brain from '../../image/265-2656199_brain-icon-hd-png-download-PhotoRoom.png'
 import { useHistory } from 'react-router-dom';
-import {COURSE_ROUTE, PROFILE_ROUTE} from '../../utils/consts';
+import { COURSE_ROUTE, FORUM_ROUTE, PROFILE_ROUTE } from '../../utils/consts';
+import { deleteToken } from '../../api/axios/jwt/jwtLocalStorage';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -64,6 +63,8 @@ export default function PrimarySearchAppBar() {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const history = useHistory()
 
+
+
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -79,6 +80,11 @@ export default function PrimarySearchAppBar() {
         setAnchorEl(null);
         handleMobileMenuClose();
     };
+
+    const handleLogout = () => {
+        deleteToken()
+        window.location.reload()
+    }
 
     const handleRedirectProfile = () => {
         history.push(PROFILE_ROUTE)
@@ -105,11 +111,19 @@ export default function PrimarySearchAppBar() {
             open={ isMenuOpen }
             onClose={ handleMenuClose }
         >
-            <MenuItem onClick={(e) => {
+            <MenuItem onClick={ (e) => {
                 handleRedirectProfile(e)
                 handleMenuClose(e)
-            } }>Profile</MenuItem>
-            <MenuItem onClick={ handleMenuClose }>Logout</MenuItem>
+            } }>
+                Личный кабинет
+            </MenuItem>
+
+            <MenuItem onClick={ (e) => {
+                handleMenuClose(e)
+                handleLogout(e)
+            } }>
+                Выйти
+            </MenuItem>
         </Menu>
     );
 
@@ -169,8 +183,8 @@ export default function PrimarySearchAppBar() {
         <Box sx={ { flexGrow: 1 } }>
             <AppBar sx={ { background: '#9d88fc' } } position="static">
                 <Toolbar>
-                        <a className='brand' href='/'>IT-BRAINS</a>
-                    <img className='logo-img' src={brain} width={50}/>
+                    <a className='brand' href='/'>IT-BRAINS</a>
+                    <img className='logo-img' src={ brain } width={ 50 }/>
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon/>
@@ -180,8 +194,8 @@ export default function PrimarySearchAppBar() {
                             inputProps={ { 'aria-label': 'search' } }
                         />
                     </Search>
-                    <a href={COURSE_ROUTE}>Курсы</a>
-                    <a href={COURSE_ROUTE}>Форум</a>
+                    <a href={ COURSE_ROUTE }>Курсы</a>
+                    <a href={ FORUM_ROUTE }>Форум</a>
                     <Box sx={ { flexGrow: 1 } }/>
                     <Box sx={ { display: { xs: 'none', md: 'flex' } } }>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">

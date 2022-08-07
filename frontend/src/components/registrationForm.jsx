@@ -19,77 +19,77 @@ export const RegistrationForm = () => {
         <form className='container-form-auth' onSubmit={ handleSubmit(onSubmit) }>
             <h2>Регистрация</h2>
             <div className='container-radio-auth'>
-                <label className='label-auth'>First name</label>
+                <label className='label-auth'>Имя</label>
                 <input className='input-auth' { ...register("firstName", {
                     required: true,
                     pattern: {
                         value: /^[A-Za-z]+$/i,
-                        message: 'First name must contain only Latin letters'
+                        message: 'Имя должно содержать только латинские буквы'
                     }
                 }) } />
                 { errors.firstName && <span style={ { color: 'red' } }>{ errors.firstName.message }</span> }
             </div>
             <div className='container-radio-auth'>
-                <label className='label-auth'>Last name</label>
+                <label className='label-auth'>Фамилия</label>
                 <input className='input-auth' { ...register("lastName", {
                     required: true,
                     pattern: {
                         value: /^[A-Za-z]+$/i,
-                        message: 'Last name must contain only Latin letters'
+                        message: 'Фамилия должна содержать только латинские буквы'
                     }
                 }) } />
                 { errors.lastName && <span style={ { color: 'red' } }>{ errors.lastName.message }</span> }
             </div>
             <div className='container-radio-auth'>
-                <label className='label-auth'>Birth date</label>
+                <label className='label-auth'>Дата рождения</label>
                 <input className='input-auth' type="date" { ...register("birthDate", {
                     required: true
                 }) } />
             </div>
             <div className='container-radio-auth'>
-                <label className='label-auth'>Choose your role</label>
+                <label className='label-auth'>Выберите свою роль</label> <br/>
                 <input className='radio-auth' type="radio" { ...register('role') } value="teacher"/>
-                <label className='label-auth' htmlFor='teacher'>teacher</label>
+                <label className='label-auth' htmlFor='teacher'>Преподаватель</label> <br/>
                 <input className='radio-auth' type="radio" { ...register('role') } value="student"/>
-                <label className='label-auth' htmlFor='student'>student</label>
+                <label className='label-auth' htmlFor='student'>Студент</label>
             </div>
             <div className='container-radio-auth'>
-                <label className='label-auth'>Interests</label>
+                <label className='label-auth'>Интересы</label>
                 <select className='input-auth' { ...register("interests", { required: true }) }>
                     <option value="Frontend">Frontend</option>
                     <option value="Backend">Backend</option>
                     <option value="Analytics">Data Analyst</option>
-                    <option value="Data Science">Data Analyst</option>
-                    <option value="Data Analytics">Data Analyst</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Data Analytics">Data Analytics</option>
                     <option value="Q&A">Q&A</option>
                     <option value="NodeJS">NodeJS</option>
                     <option value="DevOps">DevOps</option>
                 </select>
             </div>
             <div className='container-radio-auth'>
-                <label className='label-auth'>Email</label>
+                <label className='label-auth'>Е-мэйл</label>
                 <input className='input-auth' { ...register("email", {
                     required: true,
                     pattern: EMAIL_REGEXP
                 }) } />
-                { errors.email && <span style={ { color: 'red' } }>email should be correct</span> }
+                { errors.email && <span style={ { color: 'red' } }>Электронная почта должна быть правильной</span> }
             </div>
             <div className='container-radio-auth'>
-                <label className='label-auth'>Password</label>
+                <label className='label-auth'>Пароль</label>
                 <input className='input-auth' type='password' { ...register("password", {
                     required: "You must specify a password",
                     minLength: {
                         value: 8,
-                        message: "Password must have at least 8 characters"
+                        message: "Пароль должен содержать не менее 8 символов"
                     }
                 }) } />
                 { errors.password && <span style={ { color: 'red' } }>{ errors.password.message }</span> }
             </div>
             <div className='container-radio-auth'>
-                <label className='label-auth'>Repeat password</label>
+                <label className='label-auth'>Повторите пароль</label>
                 <input className='input-auth' type="password" { ...register("password_repeat", {
                     validate: value =>
-                        value === password.current || "The passwords do not match"
+                        value === password.current || "Пароли не совпадают"
                 }) }
                 />
                 { errors.password_repeat && <p style={ { color: 'red' } }>{ errors.password_repeat.message }</p> }
