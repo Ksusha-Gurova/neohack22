@@ -1,54 +1,56 @@
+html {
+    background: #f3fbff;
+}
+
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+    font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-y:hidden;
     overflow-x: hidden;
-    background: #eeeefd;
 }
+
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-.app {
-}
-
-.logo-img {
-    width: 50px;
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    margin: 0 10px;
 }
 
 .footer {
-    position: absolute;
+    position: fixed;
     display: inline-block;
     width: 100%;
-    height: 50px;
+    height: 44px;
     bottom: 0;
+    left: 0;
+    text-align: center;
     background: #9d88fc;
-    padding: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-
 }
 
 .content-footer {
-    padding: 5px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .card-content {
     display: flex;
     justify-content: space-between;
-    /*margin: 5px;*/
 }
 
 .brand {
     position: relative;
-    font-size: 25px;
     color: #ffffff;
-    /*font-weight: 700;*/
     text-transform: uppercase;
     text-decoration: none;
     transition: color .2s linear;
@@ -116,4 +118,81 @@ code {
 
 .img-main {
     float: left;
+    display: block;
 }
+
+.img2-main {
+    display: block;
+    float: right;
+}
+
+.info-main-theme {
+    min-width: 700px;
+    height: auto;
+    margin-bottom: 100px;
+}
+
+.container-info-main-theme {
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+}
+
+.container-form-auth {
+    background: white;
+    max-width: 400px;
+    padding: 10px;
+    margin: 40px auto 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+}
+
+.input-auth {
+    display: block;
+    min-width: 395px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #7a7b7c;
+}
+
+.label-auth{
+    font-size: 18px;
+    color: #18095d;
+    margin-top: 15px;
+}
+
+.radio-auth {
+    margin-left: 10px;
+}
+
+.container-radio-auth {
+    margin-bottom: 15px;
+}
+
+.btn-submit {
+    min-width: 395px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #7a7b7c;
+    margin-bottom: 15px;
+    color: white;
+    background: #9d88fc;
+    font-size: 18px;
+}
+
+.btn-submit:hover {
+    background: #7e62fa;
+}
+
+.btn-submit:active {
+    background: #5e3afd;
+}
+
+.req-reg {
+    text-align: center;
+}
+
+.info {
+    font-size: 14px;
+    cursor: pointer;
+    color: #2b00ff;}

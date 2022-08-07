@@ -5,9 +5,8 @@ import { LOGIN_ROUTE } from '../utils/consts';
 export const AuthContainer = ({ publicRoutes }) => {
     return (
         <div>
-            { publicRoutes.map(({ path, Component }) =>
-                <Route key={ path } path={ path } component={ Component } exact/>) }
-            <Redirect to={ LOGIN_ROUTE }/>
+            {/*{ publicRoutes.map(({ path, Component }) =>*/}
+            {/*    <Route key={ path } path={ path } component={ Component } exact/>) }*/}
         </div>
     );
 };
