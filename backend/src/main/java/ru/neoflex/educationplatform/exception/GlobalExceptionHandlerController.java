@@ -60,5 +60,4 @@ public class GlobalExceptionHandlerController {
             .message(e.getMessage())
             .build();
   }
-
 }

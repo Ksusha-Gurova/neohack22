@@ -2,7 +2,8 @@ package ru.neoflex.educationplatform.service;
 
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.CourseAllInfoResponseDto;
-import org.openapitools.model.CourseRequestDto;
+import org.openapitools.model.CourseCreateRequestDto;
+import org.openapitools.model.CourseUpdateRequestDto;
 import org.openapitools.model.LessonAllInfo;
 import org.springframework.stereotype.Service;
 import ru.neoflex.educationplatform.mapper.CourseMapper;
@@ -46,21 +47,25 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public CourseAllInfoResponseDto updateCourse(CourseRequestDto courseRequestDto) {
+    public CourseAllInfoResponseDto createCourse(CourseCreateRequestDto courseCreateRequestDto) {
+        List<InterestTag> allTagsById = tagRepository.findAllByIdIn(courseCreateRequestDto.getInterestTags());
+        User author = userRepository.findById(courseCreateRequestDto.getAuthor())
+                .orElseThrow(() -> new EntityNotFoundException("В базе нет пользователя с id " + courseCreateRequestDto.getAuthor()));
+        Course save = coursRepository.save(courseMapper.mapCourseCreateRequestDtoToEntity(courseCreateRequestDto, allTagsById, author));
+        return courseMapper.mapEntityToCourseAllInfoResponseDto(save);
+    }
+
+    @Override
+    public CourseAllInfoResponseDto updateCourse(CourseUpdateRequestDto courseRequestDto) {
         List<InterestTag> allTagsById = tagRepository.findAllByIdIn(courseRequestDto.getInterestTags());
         User author = userRepository.findById(courseRequestDto.getAuthor())
                 .orElseThrow(() -> new EntityNotFoundException("В базе нет пользователя с id " + courseRequestDto.getAuthor()));
 
-        if (courseRequestDto.getId() != null) {
-            Course course = coursRepository.findById(courseRequestDto.getId())
-                    .map(c -> courseMapper.updateEntityFromCourseRequestDto(c, courseRequestDto, allTagsById, author))
-                    .orElseThrow(() -> new EntityNotFoundException("В базе нет курса с id " + courseRequestDto.getId()));
-            course = coursRepository.save(course);
-            return courseMapper.mapEntityToCourseAllInfoResponseDto(course);
-        } else {
-            Course save = coursRepository.save(courseMapper.mapCourseRequestDtoToEntity(courseRequestDto, allTagsById, author));
-            return courseMapper.mapEntityToCourseAllInfoResponseDto(save);
-        }
+        Course course = coursRepository.findById(courseRequestDto.getId())
+                .map(c -> courseMapper.updateEntityFromCourseRequestDto(c, courseRequestDto, allTagsById, author))
+                .orElseThrow(() -> new EntityNotFoundException("В базе нет курса с id " + courseRequestDto.getId()));
+        course = coursRepository.save(course);
+        return courseMapper.mapEntityToCourseAllInfoResponseDto(course);
 
     }
 

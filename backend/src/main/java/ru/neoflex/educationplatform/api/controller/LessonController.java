@@ -3,7 +3,8 @@ package ru.neoflex.educationplatform.api.controller;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.api.LessonsApi;
 import org.openapitools.model.LessonAllInfo;
-import org.openapitools.model.LessonsRequestDto;
+import org.openapitools.model.LessonCreateRequestDto;
+import org.openapitools.model.LessonUpdateRequestDto;
 import org.openapitools.model.TasksAllInfo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +35,12 @@ public class LessonController implements LessonsApi {
     }
 
     @Override
-    public ResponseEntity<LessonAllInfo> updateLessons(LessonsRequestDto lessonsRequestDto) {
-        return ResponseEntity.ok(lessonService.updateLessons(lessonsRequestDto));
+    public ResponseEntity<LessonAllInfo> updateLesson(LessonUpdateRequestDto lessonsRequestDto) {
+        return ResponseEntity.ok(lessonService.updateLesson(lessonsRequestDto));
+    }
+
+    @Override
+    public ResponseEntity<LessonAllInfo> createLesson(LessonCreateRequestDto lessonCreateRequestDto) {
+        return ResponseEntity.ok(lessonService.createLesson(lessonCreateRequestDto));
     }
 }

@@ -16,7 +16,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -38,7 +37,7 @@ public class Task {
     private Lesson lesson;
 
     @Column(name = "question", nullable = false)
-    private String name;
+    private String question;
 
     @OneToMany(mappedBy = "task")
     private Set<Answer> answers = new LinkedHashSet<>();

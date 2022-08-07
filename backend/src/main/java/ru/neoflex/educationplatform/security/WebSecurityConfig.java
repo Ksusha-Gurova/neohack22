@@ -12,8 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -27,18 +25,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
   protected void configure(HttpSecurity http) throws Exception {
 
     http
+//            .csrf().disable()
+//            .cors().disable()
+//            .authorizeRequests()
+//            .anyRequest().permitAll()
+//            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+
+//            .csrf().disable()
+//            .cors().disable()
+//            .authorizeRequests()
+//            .antMatchers("/users/**").permitAll()
+//            .antMatchers("/courses/**").permitAll()
+//            .antMatchers("/tags/**").permitAll()
+//            .antMatchers("/lessons/**").permitAll()
+//            .antMatchers("/tasks/**").permitAll()
+//            .anyRequest().authenticated()
+//            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//            .and().apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
+
+
             .csrf().disable()
             .cors().disable()
             .authorizeRequests()
-
-//            .anyRequest().permitAll();
-
             .antMatchers("/users/login").permitAll()
             .antMatchers("/users/registration").permitAll()
             .antMatchers("/courses/available").permitAll()
             .anyRequest().authenticated()
             .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and().exceptionHandling().accessDeniedPage("/users/login")
             .and().apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
   }
 

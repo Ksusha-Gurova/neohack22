@@ -4,10 +4,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.openapitools.model.LessonAllInfo;
-import org.openapitools.model.LessonsRequestDto;
+import org.openapitools.model.LessonCreateRequestDto;
+import org.openapitools.model.LessonUpdateRequestDto;
 import ru.neoflex.educationplatform.model.Course;
 import ru.neoflex.educationplatform.model.Lesson;
-import ru.neoflex.educationplatform.model.User;
 
 @Mapper(componentModel = "spring")
 public interface LessonMapper {
@@ -18,27 +18,17 @@ public interface LessonMapper {
     LessonAllInfo mapEntityToLessonAllInfo(Lesson lesson);
 
     @Mapping(target = "course", source = "course")
-    @Mapping(target = "author", source = "author")
-    @Mapping(target = "teacher", source = "teacher")
     @Mapping(target = "name", source = "lessonsRequestDto.name")
     @Mapping(target = "status", source = "lessonsRequestDto.status")
-    @Mapping(target = "userLessonLinks", ignore = true)
+//    @Mapping(target = "userLessonLinks", ignore = true)
     @Mapping(target = "id", ignore = true)
-    Lesson updateLessonFromLessonsRequestDto(@MappingTarget Lesson lesson,
-                                             LessonsRequestDto lessonsRequestDto,
-                                             Course course,
-                                             User author,
-                                             User teacher);
+    Lesson updateLessonFromLessonUpdateRequestDto(@MappingTarget Lesson lesson,
+                                                  LessonUpdateRequestDto lessonsRequestDto,
+                                                  Course course);
+
 
     @Mapping(target = "course", source = "course")
-    @Mapping(target = "author", source = "author")
-    @Mapping(target = "teacher", source = "teacher")
-    @Mapping(target = "name", source = "lessonsRequestDto.name")
-    @Mapping(target = "status", source = "lessonsRequestDto.status")
-    @Mapping(target = "userLessonLinks", ignore = true)
-    @Mapping(target = "id", source = "lessonsRequestDto.id")
-    Lesson mapLessonFromLessonsRequestDto(LessonsRequestDto lessonsRequestDto,
-                                          Course course,
-                                          User author,
-                                          User teacher);
+    @Mapping(target = "status", source = "lessonCreateRequestDto.status")
+    @Mapping(target = "name", source = "lessonCreateRequestDto.name")
+    Lesson mapLessonFromLessonsCreateRequestDto(LessonCreateRequestDto lessonCreateRequestDto, Course course);
 }

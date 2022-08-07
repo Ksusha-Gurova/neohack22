@@ -2,14 +2,15 @@ package ru.neoflex.educationplatform.service;
 
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.LessonAllInfo;
-import org.openapitools.model.LessonsRequestDto;
+import org.openapitools.model.LessonCreateRequestDto;
+import org.openapitools.model.LessonUpdateRequestDto;
 import org.openapitools.model.TasksAllInfo;
 import org.springframework.stereotype.Service;
-import ru.neoflex.educationplatform.mapper.TaskMapper;
 import ru.neoflex.educationplatform.mapper.LessonMapper;
+import ru.neoflex.educationplatform.mapper.TaskMapper;
 import ru.neoflex.educationplatform.model.Course;
 import ru.neoflex.educationplatform.model.Lesson;
-import ru.neoflex.educationplatform.model.User;
+import ru.neoflex.educationplatform.repository.CoursRepository;
 import ru.neoflex.educationplatform.repository.LessonRepository;
 
 import javax.persistence.EntityNotFoundException;
@@ -23,6 +24,7 @@ public class LessonServiceImpl implements LessonService{
     private final LessonRepository lessonRepository;
     private final LessonMapper lessonMapper;
     private final TaskMapper taskMapper;
+    private final CoursRepository coursRepository;
 
     @Override
     public void deleteLesson(Long id) {
@@ -43,30 +45,34 @@ public class LessonServiceImpl implements LessonService{
     }
 
     @Override
-    public LessonAllInfo updateLessons(LessonsRequestDto lessonsRequestDto) {
+    public LessonAllInfo updateLesson(LessonUpdateRequestDto lessonsRequestDto) {
 
-        Course course = lessonRepository.findById(lessonsRequestDto.getId())
-                .map(lesson -> lesson.getCourse())
+        Course course = coursRepository.findById(lessonsRequestDto.getCourseId())
+                .orElseThrow(() -> new EntityNotFoundException("в базе нет курса с id " + lessonsRequestDto.getCourseId()));
+
+//        User teacher = lessonRepository.findById(lessonsRequestDto.getId())
+//                .map(lesson -> lesson.getTeacher())
+//                .orElseThrow(() -> new EntityNotFoundException("в базе нет урока с id " + lessonsRequestDto.getId()));
+//
+//        User author = lessonRepository.findById(lessonsRequestDto.getId())
+//                .map(lesson -> lesson.getAuthor())
+//                .orElseThrow(() -> new EntityNotFoundException("в базе нет урока с id " + lessonsRequestDto.getId()));
+
+
+        Lesson lesson = lessonRepository.findById(lessonsRequestDto.getId())
                 .orElseThrow(() -> new EntityNotFoundException("в базе нет урока с id " + lessonsRequestDto.getId()));
+        lesson = lessonMapper.updateLessonFromLessonUpdateRequestDto(lesson, lessonsRequestDto, course);
+        return lessonMapper.mapEntityToLessonAllInfo(lessonRepository.save(lesson));
 
-        User teacher = lessonRepository.findById(lessonsRequestDto.getId())
-                .map(lesson -> lesson.getTeacher())
-                .orElseThrow(() -> new EntityNotFoundException("в базе нет урока с id " + lessonsRequestDto.getId()));
+    }
 
-        User author = lessonRepository.findById(lessonsRequestDto.getId())
-                .map(lesson -> lesson.getAuthor())
-                .orElseThrow(() -> new EntityNotFoundException("в базе нет урока с id " + lessonsRequestDto.getId()));
+    @Override
+    public LessonAllInfo createLesson(LessonCreateRequestDto lessonCreateRequestDto) {
+        Course course = coursRepository.findById(lessonCreateRequestDto.getCourseId())
+                .orElseThrow(() -> new EntityNotFoundException("в базе нет курса с id " + lessonCreateRequestDto.getCourseId()));
 
-
-        if (lessonsRequestDto.getId() != null){
-            Lesson lesson = lessonRepository.findById(lessonsRequestDto.getId())
-                    .orElseThrow(() -> new EntityNotFoundException("в базе нет урока с id " + lessonsRequestDto.getId()));
-            lesson = lessonMapper.updateLessonFromLessonsRequestDto(lesson, lessonsRequestDto, course, author, teacher);
-            return lessonMapper.mapEntityToLessonAllInfo(lessonRepository.save(lesson));
-        } else {
-            Lesson lesson = lessonMapper.mapLessonFromLessonsRequestDto(lessonsRequestDto, course, author, teacher);
-            lesson = lessonRepository.save(lesson);
-            return lessonMapper.mapEntityToLessonAllInfo(lesson);
-        }
+        Lesson lesson = lessonMapper.mapLessonFromLessonsCreateRequestDto(lessonCreateRequestDto, course);
+        lesson = lessonRepository.save(lesson);
+        return lessonMapper.mapEntityToLessonAllInfo(lesson);
     }
 }
