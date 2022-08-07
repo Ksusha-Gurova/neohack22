@@ -12,8 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -30,15 +28,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .csrf().disable()
             .cors().disable()
             .authorizeRequests()
-
-//            .anyRequest().permitAll();
-
             .antMatchers("/users/login").permitAll()
             .antMatchers("/users/registration").permitAll()
             .antMatchers("/courses/available").permitAll()
             .anyRequest().authenticated()
             .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and().exceptionHandling().accessDeniedPage("/users/login")
+//            .and().exceptionHandling().accessDeniedPage("/users/login")
             .and().apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
   }
 
@@ -66,5 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
   public AuthenticationManager authenticationManagerBean() throws Exception {
     return super.authenticationManagerBean();
   }
+
+
 
 }
