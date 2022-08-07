@@ -47,11 +47,10 @@ export const RegistrationForm = () => {
                 }) } />
             </div>
             <div className='container-radio-auth'>
-                <label className='label-auth'>Выберите свою роль</label> <br/>
                 <input className='radio-auth' type="radio" { ...register('role') } value="teacher"/>
-                <label className='label-auth' htmlFor='teacher'>Преподаватель</label> <br/>
+                <label className='label-auth' htmlFor='teacher'>Обучаю</label>
                 <input className='radio-auth' type="radio" { ...register('role') } value="student"/>
-                <label className='label-auth' htmlFor='student'>Студент</label>
+                <label className='label-auth' htmlFor='student'>Изучаю</label>
             </div>
             <div className='container-radio-auth'>
                 <label className='label-auth'>Интересы</label>
@@ -67,7 +66,7 @@ export const RegistrationForm = () => {
                 </select>
             </div>
             <div className='container-radio-auth'>
-                <label className='label-auth'>Е-мэйл</label>
+                <label className='label-auth'>Электронная почта</label>
                 <input className='input-auth' { ...register("email", {
                     required: true,
                     pattern: EMAIL_REGEXP

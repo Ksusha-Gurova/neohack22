@@ -24,7 +24,7 @@ export const LoginForm = () => {
         <form className='container-form-auth' onSubmit={ handleSubmit(onSubmit) }>
             <h2>Войти</h2>
             <div className='container-radio-auth'>
-                <label className='label-auth'>Е-мэйл</label>
+                <label className='label-auth'>Электронная почта</label>
                 <input className='input-auth' { ...register("email", {
                     required: true,
                     pattern: EMAIL_REGEXP
