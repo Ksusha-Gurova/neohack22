@@ -7,6 +7,12 @@ spring:
     username: ${POSTGRES_USER:team-11}
     password: ${POSTGRES_PASSWORD:ootaishu3hie0EiTo2Teicai3aeK8guk}
 
+  liquibase:
+    enabled: true
+    change-log: db/changelog/db.changelog-master.xml
+    drop-first: false
+    default-schema: education_platform
+
 application:
   jwt:
     secret: ${TOKEN_SECRET_KEY:mkASfjdioeijhfouebfka`bsdkhvbsd;vbk'asejfiwehfawfawefweag}

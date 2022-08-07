@@ -12,14 +12,8 @@ import ru.neoflex.educationplatform.model.Task;
 @Mapper(componentModel = "spring", uses = AnswerMapper.class)
 public interface TaskMapper {
 
-//    @Mapping(target = "lesson", source = "lesson")
-//    @Mapping(target = "id", source = "taskRequestDto.id")
-//    @Mapping(target = "name", source = "taskRequestDto.name")
-//    Task mapRequestDtoToEntity(TaskRequestDto taskRequestDto, Lesson lesson);
-
     @Mapping(target = "lesson", source = "lesson")
     @Mapping(target = "id", ignore = true)
-//    @Mapping(target = "name", source = "taskRequestDto.name")
     Task updateTaskFromTaskUpdateRequestDto(@MappingTarget Task task, TaskUpdateRequestDto taskRequestDto, Lesson lesson);
 
     @Mapping(target = "lessonId", source = "lesson.id")
