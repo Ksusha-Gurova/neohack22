@@ -25,11 +25,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
   protected void configure(HttpSecurity http) throws Exception {
 
     http
-            .csrf().disable()
-            .cors().disable()
-            .authorizeRequests()
-            .anyRequest().permitAll()
-            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//            .csrf().disable()
+//            .cors().disable()
+//            .authorizeRequests()
+//            .anyRequest().permitAll()
+//            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 
 //            .csrf().disable()
@@ -45,16 +45,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 //            .and().apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
 
 
-
-//            .csrf().disable()
-//            .cors().disable()
-//            .authorizeRequests()
-//            .antMatchers("/users/login").permitAll()
-//            .antMatchers("/users/registration").permitAll()
-//            .antMatchers("/courses/available").permitAll()
-//            .anyRequest().authenticated()
-//            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//            .and().apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
+            .csrf().disable()
+            .cors().disable()
+            .authorizeRequests()
+            .antMatchers("/users/login").permitAll()
+            .antMatchers("/users/registration").permitAll()
+            .antMatchers("/courses/available").permitAll()
+            .anyRequest().authenticated()
+            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and().apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
   }
 
   @Override
