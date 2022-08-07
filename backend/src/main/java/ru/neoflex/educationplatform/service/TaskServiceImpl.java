@@ -2,7 +2,8 @@ package ru.neoflex.educationplatform.service;
 
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.AnswerAllInfo;
-import org.openapitools.model.TaskRequestDto;
+import org.openapitools.model.TaskCreateRequestDto;
+import org.openapitools.model.TaskUpdateRequestDto;
 import org.openapitools.model.TasksAllInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import ru.neoflex.educationplatform.repository.TaskRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -49,24 +51,31 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TasksAllInfo saveOrUpdateTask(TaskRequestDto taskRequestDto) {
-        Lesson lesson = lessonRepository.findById(taskRequestDto.getLesson())
-                .orElseThrow(() -> new EntityNotFoundException("в базе нет урока с id " + taskRequestDto.getLesson()));
+    public void updateTask(TaskUpdateRequestDto taskUpdateRequestDto) {
+        Lesson lesson = lessonRepository.findById(taskUpdateRequestDto.getLesson())
+                .orElseThrow(() -> new EntityNotFoundException("в базе нет урока с id " + taskUpdateRequestDto.getLesson()));
 
-        Task task;
-        if (taskRequestDto.getId() == null){
-            task = taskMapper.mapRequestDtoToEntity(taskRequestDto, lesson);
-        } else {
-            task = taskRepository.findById(taskRequestDto.getId())
-                    .map(t -> taskMapper.updateTaskFromRequestDto(t, taskRequestDto, lesson))
-                    .orElse(taskMapper.mapRequestDtoToEntity(taskRequestDto, lesson));
-        }
+        Task taskFromDb = taskRepository.findById(taskUpdateRequestDto.getId())
+                .orElseThrow(() -> new EntityNotFoundException("в базе нет задачи с id " + taskUpdateRequestDto.getId()));
+        Set<Answer> answers = taskFromDb.getAnswers();
+        Task updatedTask = taskMapper.updateTaskFromTaskUpdateRequestDto(taskFromDb, taskUpdateRequestDto, lesson);
+        updatedTask.setAnswers(answers);
+        taskRepository.save(updatedTask);
+    }
 
-        Task save = taskRepository.save(task);
-        List<Answer> answers = taskRequestDto.getAnswers().stream()
+    @Override
+    public void createTask(TaskCreateRequestDto taskCreateRequestDto) {
+        Lesson lesson = lessonRepository.findById(taskCreateRequestDto.getLesson())
+                .orElseThrow(() -> new EntityNotFoundException("в базе нет урока с id " + taskCreateRequestDto.getLesson()));
+        Set<Answer> answers = taskCreateRequestDto.getAnswers().stream()
                 .map(answerMapper::mapEntityFromDto)
-                .map(answer -> answer.toBuilder().task(save).build()).collect(Collectors.toList());
+                .collect(Collectors.toSet());
+        Task taskToSave = taskMapper.mapEntityFromTaskCreateRequestDto(taskCreateRequestDto, lesson);
+
+        taskToSave.setAnswers(answers);
+        taskToSave.setLesson(lesson);
+        taskRepository.save(taskToSave);
+        answers.forEach(answer -> answer.setTask(taskToSave));
         answerRepository.saveAll(answers);
-        return taskMapper.mapEntityToTasksAllInfo(taskRepository.getById(save.getId()));
     }
 }

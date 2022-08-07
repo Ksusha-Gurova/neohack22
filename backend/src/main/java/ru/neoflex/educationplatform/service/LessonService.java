@@ -1,7 +1,8 @@
 package ru.neoflex.educationplatform.service;
 
 import org.openapitools.model.LessonAllInfo;
-import org.openapitools.model.LessonsRequestDto;
+import org.openapitools.model.LessonCreateRequestDto;
+import org.openapitools.model.LessonUpdateRequestDto;
 import org.openapitools.model.TasksAllInfo;
 
 import java.util.List;
@@ -13,5 +14,7 @@ public interface LessonService {
 
     List<TasksAllInfo> getTasksByLessonId(Long id);
 
-    LessonAllInfo updateLessons(LessonsRequestDto lessonsRequestDto);
+    LessonAllInfo updateLesson(LessonUpdateRequestDto lessonsRequestDto);
+
+    LessonAllInfo createLesson(LessonCreateRequestDto lessonCreateRequestDto);
 }

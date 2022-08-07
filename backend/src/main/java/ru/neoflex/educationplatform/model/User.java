@@ -66,7 +66,7 @@ public class User {
     private Set<Lesson> lessonsAsTeacher = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user")
-    private Set<UserQuestionAnswerLink> userQuestionAnswerLinks = new LinkedHashSet<>();
+    private Set<UserTaskAnswerLink> userTaskAnswerLinks = new LinkedHashSet<>();
 
     @ManyToMany
     @JoinTable(name = "users_interest_tag_link",

@@ -4,7 +4,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.openapitools.model.CourseAllInfoResponseDto;
-import org.openapitools.model.CourseRequestDto;
+import org.openapitools.model.CourseCreateRequestDto;
+import org.openapitools.model.CourseUpdateRequestDto;
 import ru.neoflex.educationplatform.model.Course;
 import ru.neoflex.educationplatform.model.InterestTag;
 import ru.neoflex.educationplatform.model.User;
@@ -20,10 +21,14 @@ public interface CourseMapper {
     @Mapping(target = "interestTags", source = "allTagsById")
     @Mapping(target = "author", source = "author")
     @Mapping(target = "id", source = "courseRequestDto.id")
-    Course mapCourseRequestDtoToEntity(CourseRequestDto courseRequestDto, List<InterestTag> allTagsById, User author);
+    Course mapCourseUpdateRequestDtoToEntity(CourseUpdateRequestDto courseRequestDto, List<InterestTag> allTagsById, User author);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "interestTags", source = "allTagsById")
     @Mapping(target = "author", source = "author")
-    Course updateEntityFromCourseRequestDto(@MappingTarget Course course, CourseRequestDto courseRequestDto, List<InterestTag> allTagsById, User author);
+    Course updateEntityFromCourseRequestDto(@MappingTarget Course course, CourseUpdateRequestDto courseRequestDto, List<InterestTag> allTagsById, User author);
+
+    @Mapping(target = "interestTags", source = "allTagsById")
+    @Mapping(target = "author", source = "author")
+    Course mapCourseCreateRequestDtoToEntity(CourseCreateRequestDto courseCreateRequestDto, List<InterestTag> allTagsById, User author);
 }

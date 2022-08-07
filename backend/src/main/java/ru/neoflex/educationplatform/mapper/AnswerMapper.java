@@ -13,4 +13,6 @@ public interface AnswerMapper {
 
     @Mapping(target = "taskId", source = "task.id")
     AnswerAllInfo mapEntityToSimpleResponseDto(Answer answer);
+
+
 }
