@@ -20,12 +20,10 @@ public interface LessonMapper {
     @Mapping(target = "course", source = "course")
     @Mapping(target = "name", source = "lessonsRequestDto.name")
     @Mapping(target = "status", source = "lessonsRequestDto.status")
-//    @Mapping(target = "userLessonLinks", ignore = true)
     @Mapping(target = "id", ignore = true)
     Lesson updateLessonFromLessonUpdateRequestDto(@MappingTarget Lesson lesson,
                                                   LessonUpdateRequestDto lessonsRequestDto,
                                                   Course course);
-
 
     @Mapping(target = "course", source = "course")
     @Mapping(target = "status", source = "lessonCreateRequestDto.status")

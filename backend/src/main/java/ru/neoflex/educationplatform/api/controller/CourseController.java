@@ -7,12 +7,10 @@ import org.openapitools.model.CourseCreateRequestDto;
 import org.openapitools.model.CourseUpdateRequestDto;
 import org.openapitools.model.LessonAllInfo;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import ru.neoflex.educationplatform.service.CourseService;
 
 import java.util.List;
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequiredArgsConstructor
 public class CourseController implements CoursesApi {

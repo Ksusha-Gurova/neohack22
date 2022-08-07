@@ -12,6 +12,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -25,28 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
   protected void configure(HttpSecurity http) throws Exception {
 
     http
-//            .csrf().disable()
-//            .cors().disable()
-//            .authorizeRequests()
-//            .anyRequest().permitAll()
-//            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-
-//            .csrf().disable()
-//            .cors().disable()
-//            .authorizeRequests()
-//            .antMatchers("/users/**").permitAll()
-//            .antMatchers("/courses/**").permitAll()
-//            .antMatchers("/tags/**").permitAll()
-//            .antMatchers("/lessons/**").permitAll()
-//            .antMatchers("/tasks/**").permitAll()
-//            .anyRequest().authenticated()
-//            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//            .and().apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
-
-
-            .csrf().disable()
-            .cors().disable()
+            .cors().configurationSource(corsConfigurationSource()).and()
             .authorizeRequests()
             .antMatchers("/users/login").permitAll()
             .antMatchers("/users/registration").permitAll()
@@ -54,6 +38,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .anyRequest().authenticated()
             .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and().apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
+  }
+
+  @Bean
+  CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(Arrays.asList("*"));
+    configuration.setAllowedMethods(Arrays.asList("GET"));
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
   }
 
   @Override

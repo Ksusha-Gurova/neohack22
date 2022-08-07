@@ -1,6 +1,7 @@
 package ru.neoflex.educationplatform.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.openapitools.model.TokenDto;
 import org.openapitools.model.UserAllInfoResponseDto;
 import org.openapitools.model.UserLoginDto;
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -42,17 +44,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserResponseDto> getAllUsers() {
-        return userRepository.findAll().stream().map(userMapper::mapEntityToUserResponseDto).collect(Collectors.toList());
+        log.info("getAllUsers()");
+        return userRepository.findAll().stream()
+                .map(userMapper::mapEntityToUserResponseDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     public UserAllInfoResponseDto getUser(Long id) {
+        log.info("getUser(), id = {}", id);
         return userMapper.mapEntityToUserAllInfoResponseDto(userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("В базе нет пользователя с id " + id)));
     }
 
     @Override
     public UserAllInfoResponseDto updateUser(UserRequestDto userRequestDto) {
+        log.info("updateUser(), userRequestDto = {}", userRequestDto);
         if (userRequestDto.getId() != null){
             User user = userRepository.findById(userRequestDto.getId())
                     .orElseThrow(() -> new EntityNotFoundException("В базе нет пользователя с id " + userRequestDto.getId()));
@@ -67,6 +74,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public TokenDto login(UserLoginDto userLoginDto) {
+        log.info("login()");
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userLoginDto.getEmail(), userLoginDto.getPassword()));
             return TokenDto.builder()
@@ -79,6 +87,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registration(UserRegistrationDto userRegistrationDto) {
+        log.info("registration()");
         if (userRepository.existsByEmail(userRegistrationDto.getEmail())) {
             throw new CustomException("Пользователь с таким email уже существует", HttpStatus.BAD_REQUEST);
         } else {

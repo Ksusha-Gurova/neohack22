@@ -1,6 +1,7 @@
 package ru.neoflex.educationplatform.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.openapitools.model.AnswerAllInfo;
 import org.openapitools.model.TaskCreateRequestDto;
 import org.openapitools.model.TaskUpdateRequestDto;
@@ -18,10 +19,12 @@ import ru.neoflex.educationplatform.repository.TaskRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -35,16 +38,27 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void deleteTaskById(Long id) {
+        log.info("deleteTaskById(), id = {}", id);
         taskRepository.deleteById(id);
     }
 
     @Override
     public List<AnswerAllInfo> getAnswersByTaskId(Long id) {
+        log.info("getAnswersByTaskId(), id = {}", id);
+        if (id != null) {
+            Optional<Task> task = taskRepository.findById(id);
+            if (task.isPresent()) {
+                return task.get().getAnswers().stream()
+                        .map(answerMapper::mapEntityToSimpleResponseDto)
+                        .collect(Collectors.toList());
+            }
+        }
         return null;
     }
 
     @Override
     public TasksAllInfo getTaskById(Long id) {
+        log.info("getTaskById(), id = {}", id);
         return taskRepository.findById(id)
                 .map(taskMapper::mapEntityToTasksAllInfo)
                 .orElseThrow(() -> new EntityNotFoundException("В базе нет задачи с id " + id));
@@ -52,6 +66,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void updateTask(TaskUpdateRequestDto taskUpdateRequestDto) {
+        log.info("updateTask(), taskUpdateRequestDto = {}", taskUpdateRequestDto);
         Lesson lesson = lessonRepository.findById(taskUpdateRequestDto.getLesson())
                 .orElseThrow(() -> new EntityNotFoundException("в базе нет урока с id " + taskUpdateRequestDto.getLesson()));
 
@@ -65,6 +80,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void createTask(TaskCreateRequestDto taskCreateRequestDto) {
+        log.info("createTask(), taskCreateRequestDto = {}", taskCreateRequestDto);
         Lesson lesson = lessonRepository.findById(taskCreateRequestDto.getLesson())
                 .orElseThrow(() -> new EntityNotFoundException("в базе нет урока с id " + taskCreateRequestDto.getLesson()));
         Set<Answer> answers = taskCreateRequestDto.getAnswers().stream()

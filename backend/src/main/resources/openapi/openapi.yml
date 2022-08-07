@@ -440,6 +440,30 @@ paths:
                 items:
                   $ref: "#/components/schemas/SimpleResponseDto"
 
+  /statistics/lessons/{id}:
+    get:
+      tags:
+        - statistics
+      summary: статистика по уроку
+      operationId: getS
+      parameters:
+          - name: id
+            in: path
+            description: Lesson id
+            required: true
+            schema:
+              type: integer
+              format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SimpleResponseDto"
+
 
 #  /statistics/courses:
 #  /statistics/courses/{id}:
@@ -447,7 +471,6 @@ paths:
 #  /statistics/lessons:
 #  /statistics/lessons/{id}:
 #
-#  /statistics/task:
 #  /statistics/task/{id}:
 
 components:
@@ -849,12 +872,3 @@ components:
           type: string
         correct:
           type: boolean
-
-
-
-
-
-
-
-
-

@@ -18,11 +18,6 @@ public interface CourseMapper {
     @Mapping(source = "status", target = "status")
     CourseAllInfoResponseDto mapEntityToCourseAllInfoResponseDto(Course course);
 
-    @Mapping(target = "interestTags", source = "allTagsById")
-    @Mapping(target = "author", source = "author")
-    @Mapping(target = "id", source = "courseRequestDto.id")
-    Course mapCourseUpdateRequestDtoToEntity(CourseUpdateRequestDto courseRequestDto, List<InterestTag> allTagsById, User author);
-
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "interestTags", source = "allTagsById")
     @Mapping(target = "author", source = "author")
