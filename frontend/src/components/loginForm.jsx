@@ -31,6 +31,7 @@ export const LoginForm = () => {
                 }) } />
                 { errors.email && <span style={ { color: 'red' } }>Электронная почта должна быть правильной</span> }
             </div>
+
             <div className='container-radio-auth'>
                 <label className='label-auth'>Пароль</label>
                 <input className='input-auth' type='password' { ...register("password", {

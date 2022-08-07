@@ -29,6 +29,7 @@ export const RegistrationForm = () => {
                 }) } />
                 { errors.firstName && <span style={ { color: 'red' } }>{ errors.firstName.message }</span> }
             </div>
+
             <div className='container-radio-auth'>
                 <label className='label-auth'>Фамилия</label>
                 <input className='input-auth' { ...register("lastName", {
@@ -40,18 +41,21 @@ export const RegistrationForm = () => {
                 }) } />
                 { errors.lastName && <span style={ { color: 'red' } }>{ errors.lastName.message }</span> }
             </div>
+
             <div className='container-radio-auth'>
                 <label className='label-auth'>Дата рождения</label>
                 <input className='input-auth' type="date" { ...register("birthDate", {
                     required: true
                 }) } />
             </div>
+
             <div className='container-radio-auth'>
                 <input className='radio-auth' type="radio" { ...register('role') } value="teacher"/>
                 <label className='label-auth' htmlFor='teacher'>Обучаю</label>
                 <input className='radio-auth' type="radio" { ...register('role') } value="student"/>
                 <label className='label-auth' htmlFor='student'>Изучаю</label>
             </div>
+
             <div className='container-radio-auth'>
                 <label className='label-auth'>Интересы</label>
                 <select className='input-auth' { ...register("interests", { required: true }) }>
@@ -65,6 +69,7 @@ export const RegistrationForm = () => {
                     <option value="DevOps">DevOps</option>
                 </select>
             </div>
+
             <div className='container-radio-auth'>
                 <label className='label-auth'>Электронная почта</label>
                 <input className='input-auth' { ...register("email", {
@@ -73,6 +78,7 @@ export const RegistrationForm = () => {
                 }) } />
                 { errors.email && <span style={ { color: 'red' } }>Электронная почта должна быть правильной</span> }
             </div>
+
             <div className='container-radio-auth'>
                 <label className='label-auth'>Пароль</label>
                 <input className='input-auth' type='password' { ...register("password", {
@@ -84,6 +90,7 @@ export const RegistrationForm = () => {
                 }) } />
                 { errors.password && <span style={ { color: 'red' } }>{ errors.password.message }</span> }
             </div>
+
             <div className='container-radio-auth'>
                 <label className='label-auth'>Повторите пароль</label>
                 <input className='input-auth' type="password" { ...register("password_repeat", {
