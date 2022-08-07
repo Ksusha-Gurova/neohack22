@@ -187,3 +187,12 @@ a {
 .btn-submit:active {
     background: #5e3afd;
 }
+
+.req-reg {
+    text-align: center;
+}
+
+.info {
+    font-size: 14px;
+    cursor: pointer;
+    color: #2b00ff;}

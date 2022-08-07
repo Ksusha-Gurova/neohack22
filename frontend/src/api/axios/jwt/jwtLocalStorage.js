@@ -3,7 +3,6 @@ import jwtDecoder from 'jwt-decode'
 export const updateToken = (newToken) => {
     localStorage.removeItem('token')
     localStorage.setItem('token', newToken);
-    localStorage.setItem('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiaXBiaXBAbWFpbC5ydSIsImF1dGgiOlt7ImF1dGhvcml0eSI6IlJPTEVfVEVBQ0hFUiJ9XSwiaWF0IjoxNjU5ODE1Njg3LCJleHAiOjE2NjM0MTU2ODd9.AQoSg1cybPqDXo_WG7eCIGpSoPIQbb_OYAnEepif9gA");
 }
 export const setMasterToken = () => {
     localStorage.setItem('master_token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiaXBiaXBAbWFpbC5ydSIsImF1dGgiOlt7ImF1dGhvcml0eSI6IlJPTEVfVEVBQ0hFUiJ9XSwiaWF0IjoxNjU5ODE1Njg3LCJleHAiOjE2NjM0MTU2ODd9.AQoSg1cybPqDXo_WG7eCIGpSoPIQbb_OYAnEepif9gA");

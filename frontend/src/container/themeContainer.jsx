@@ -1,17 +1,26 @@
-import React from 'react';
-import BasicCard from '../components/MUIcomponets/menuMUI';
+import React, {useEffect, useState} from 'react';
+import {CourseCardMUI} from '../components/MUIcomponets/courseCardMUI';
 import { Grid } from '@mui/material';
+import {axiosGetAllAvailableCourses} from "../api/axios/axiosClient";
 
 export const ThemeContainer = () => {
 
-    const cards = [1, 2, 3, 4, 5, 6, 7]
+    const [courses, setCourses] = useState([])
+    useEffect(() => {
+        axiosGetAllAvailableCourses()
+            .then((resp) => {
+                console.log("courses",resp.data)
+                setCourses(resp.data)
+            })
+    },[]);
+
     return (
             <Grid container spacing={ { xs: 2 } } columns={ { xs: 1, sm: 8, md: 12 } }
                   sx={ { p: 5, background: '#f3fbff' } }>
-                { cards.map((card) => {
+                { courses.map((courseInfo) => {
                         return (
-                            <Grid key={ card } item xs={ 3 } md={ 4 } sm={ 4 }>
-                                <BasicCard/>
+                            <Grid key={ courseInfo } item xs={ 3 } md={ 4 } sm={ 4 }>
+                                <CourseCardMUI courseInfo={courseInfo}/>
                             </Grid>
                         )
                     }

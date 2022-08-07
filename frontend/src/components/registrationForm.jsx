@@ -94,7 +94,6 @@ export const RegistrationForm = () => {
                 />
                 { errors.password_repeat && <p style={ { color: 'red' } }>{ errors.password_repeat.message }</p> }
             </div>
-
             <input className='btn-submit' type="submit"/>
         </form>
     );
