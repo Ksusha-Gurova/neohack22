@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -28,14 +27,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .csrf().disable()
             .cors().disable()
             .authorizeRequests()
-            .anyRequest().permitAll()
+
+            .anyRequest().permitAll();
+//            .csrf().disable()
+//            .cors().disable()
+//            .authorizeRequests()
 //            .antMatchers("/users/login").permitAll()
 //            .antMatchers("/users/registration").permitAll()
 //            .antMatchers("/courses/available").permitAll()
-            .anyRequest().authenticated()
-            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//            .and().exceptionHandling().accessDeniedPage("/users/login")
-            .and().apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
+//            .anyRequest().authenticated()
+//            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//            .and().apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
   }
 
   @Override
@@ -62,7 +64,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
   public AuthenticationManager authenticationManagerBean() throws Exception {
     return super.authenticationManagerBean();
   }
-
-
 
 }
