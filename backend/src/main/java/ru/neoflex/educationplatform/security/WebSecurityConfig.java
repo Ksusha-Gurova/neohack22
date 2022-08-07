@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -24,11 +25,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
   protected void configure(HttpSecurity http) throws Exception {
 
     http
+//            .csrf().disable()
+//            .cors().disable()
+//            .authorizeRequests()
+//            .anyRequest().permitAll();
+
             .csrf().disable()
             .cors().disable()
             .authorizeRequests()
+            .antMatchers("/users/**").permitAll()
+            .antMatchers("/courses/**").permitAll()
+            .antMatchers("/tags/**").permitAll()
+            .antMatchers("/lessons/**").permitAll()
+            .antMatchers("/tasks/**").permitAll()
+            .anyRequest().authenticated()
+            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and().apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
 
-            .anyRequest().permitAll();
+
+
 //            .csrf().disable()
 //            .cors().disable()
 //            .authorizeRequests()
